@@ -431,7 +431,6 @@ end
 function ISSafehouseUI:updateAll()
     self:updateScrollableMemberList()
     self:updateButtons()
-    self:updateMemberLimitLabel()
 
     local safehouseName = self.safehouse:getTitle()
     local safehouseOwner = self.safehouse:getOwner()
@@ -447,7 +446,8 @@ function ISSafehouseUI.OnSafehousesChanged()
         if not SafeHouse.getSafehouseList():contains(safehouse) then
             safeWindow:close()
         else
-            safeWindow:updateAll()
+            safeWindow:updateScrollableMemberList()
+            safeWindow:updateButtons()
         end
     end
 end
@@ -455,11 +455,11 @@ end
 function ISSafehouseUI:updateScrollableMemberList()
     self.MemberScrollableListBox:clear()
     local safehousePlayers = self.safehouse:getPlayers()
-    local onwer = self.safehouse:getOwner()
+    local owner = self.safehouse:getOwner()
+    local selected = self.MemberScrollableListBox.selected
 
-    if not safehousePlayers:contains(onwer) then
-        self.safehouse:addPlayer(onwer)
-        self.safehouse:syncSafehouse()
+    if not safehousePlayers:contains(owner) then
+        self.safehouse:addPlayer(owner)
     end
 
     for i=0, safehousePlayers:size() - 1 do
@@ -467,9 +467,12 @@ function ISSafehouseUI:updateScrollableMemberList()
         self.MemberScrollableListBox:addItem(playerName, playerName)
     end
 
-    if #self.MemberScrollableListBox.items > 0 then
-        self.MemberScrollableListBox.selected = 1
+    if selected > #self.MemberScrollableListBox.items then
+        self.MemberScrollableListBox.selected = math.min(#self.MemberScrollableListBox.items, 1)
     end
+
+    
+    self:updateMemberLimitLabel()
 end
 
 function ISSafehouseUI:onMemberScrollableListBoxMouseDown(x, y)
@@ -630,7 +633,6 @@ function ISSafehouseUI:onSafehouseOwnerEntryTextChange()
         players = getOnlinePlayers()
         for i = 0, players:size() - 1 do
             local player = players:get(i)
-
             if player:getUsername() == newOwner then
                 isOnline = true
                 break
@@ -642,14 +644,15 @@ function ISSafehouseUI:onSafehouseOwnerEntryTextChange()
             local safe = safes:get(i)
             if safe:getOwner() == newOwner then
                 isOwner = true
+                break
             end
         end
 
         if not isAdmin then
             if not isMember then
-                tooltip = getText("Tooltip_SafehousePlus_setNewOnwerEntry_isMember", newOwner)
+                tooltip = getText("Tooltip_SafehousePlus_setNewOwnerEntry_isMember", newOwner)
             elseif not isOnline then
-                tooltip = getText("Tooltip_SafehousePlus_setNewOnwerEntry_isOnline", newOwner)
+                tooltip = getText("Tooltip_SafehousePlus_setNewOwnerEntry_isOnline", newOwner)
             elseif isOwner then
                 tooltip = getText("Tooltip_SafehousePlus_setNewOwnerEntry_isOwner", newOwner)
             end
@@ -672,7 +675,7 @@ function ISSafehouseUI:onSafehouseOwnerEntryCommand()
     if self.isValid then
         self.target.safehouse:setOwner(newOwner)
         self.target.safehouse:syncSafehouse()
-        self.target:updateAll()
+        self.target:updateScrollableMemberList()
 
         local modalWidth = 350
         local modalHeight = 100

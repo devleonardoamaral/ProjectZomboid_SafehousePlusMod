@@ -355,7 +355,6 @@ function ISSafehouseUI:updateRemoveMemberButton()
     local isOwner = self:isOwner()
     local isAdmin = self:isAdmin()
     local selectedMember = self:getSelectedMemberFromScrollableList()
-    print(selectedMember)
 
     if (isOwner or isAdmin) and selectedMember ~= nil and selectedMember then
         self.RemoveMemberButton.enable = not self:isOwner(selectedMember)

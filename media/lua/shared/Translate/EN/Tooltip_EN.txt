@@ -1,0 +1,3 @@
+Tooltip_EN = {
+    Tooltip_IGUI_UserPanel_SafehouseButton_Disabled = "You are not part of any safehouse.",
+}

@@ -1,0 +1,3 @@
+Tooltip_PTBR = {
+    Tooltip_IGUI_UserPanel_SafehouseButton_Disabled = "Você não faz parte de nenhuma safehouse.",
+}

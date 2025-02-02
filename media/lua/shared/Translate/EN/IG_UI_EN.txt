@@ -1,0 +1,33 @@
+IGUI_EN = {
+   IGUI_SafehouseUI_Safehouse = "Safehouses",
+   IGUI_UserPanel_ShowSelfUsername = "Show Your Username",
+
+   IGUI_SafehouseUI_SafehouseLimits = "Show Safehouse Limits",
+   IGUI_SafehouseUI_Respawn = "Respawn in this Safehouse",
+
+   IGUI_ISPlayerSafehousesUI_Title = "%1'S SAFEHOUSES",
+   IGUI_ISPlayerSafehousesUI_ItemName = "Name",
+   IGUI_ISPlayerSafehousesUI_ItemOwner = "Owner",
+   IGUI_ISPlayerSafehousesUI_ItemCoord = "Coordinates",
+   IGUI_ISPlayerSafehousesUI_FilterLabel = "Filter",
+
+   IGUI_ISSafehouseUI_Title = "SAFEHOUSE",
+
+   IGUI_ISSafehouseUI_CoordLabel = "Coordinates",
+   IGUI_ISSafehouseUI_SizeLabel = "Size",
+   IGUI_ISSafehouseUI_NameLabel = "Safehouse Name",
+   IGUI_ISSafehouseUI_OwnerLabel = "Owner",
+   IGUI_ISSafehouseUI_MembersScrollListLabel = "Member List",
+
+   IGUI_ISSafehouseUI_ReloadButton = "Reload",
+   IGUI_ISSafehouseUI_AddMemberButton = "Add Member",
+   IGUI_ISSafehouseUI_RemoveMemberButton = "Remove Member",
+   IGUI_ISSafehouseUI_ExitSafehouseButton = "Exit Safehouse",
+   IGUI_ISSafehouseUI_ReleaseSafehouseButton = "Release Safehouse",
+
+   IGUI_ISSafehouseUI_ItemOwnerTag = "Owner",
+   IGUI_ISSafehouseUI_ItemMemberTag = "Member",
+
+   IGUI_ISSafehouseUI_Dialog_OwnerChange = "Owner changed!",
+   IGUI_ISSafehouseUI_Dialog_SafehouseNameChange = "Safehouse name changed!",
+}

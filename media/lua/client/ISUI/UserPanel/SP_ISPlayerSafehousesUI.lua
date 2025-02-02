@@ -274,8 +274,8 @@ function ISPlayerSafehousesUI:new(player)
 
     o.filterTaskRunning = false
 
-    o.populateFrequencyMax = 50
-    o.populateFrequency = 50
+    o.populateFrequencyMax = 10
+    o.populateFrequency = 10
     ISPlayerSafehousesUI.instance = o
     return o
 end

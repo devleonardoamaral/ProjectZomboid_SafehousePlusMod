@@ -1,5 +1,21 @@
 VERSION = 1,
 
+option SafehousePlus.ShowTicketsButton
+{
+    type = boolean,
+    default = true,
+    page = SafehousePlus,
+    translation = SafehousePlus_ShowTicketsButton,
+}
+
+option SafehousePlus.ShowServerOptionsButton
+{
+    type = boolean,
+    default = true,
+    page = SafehousePlus,
+    translation = SafehousePlus_ShowServerOptionsButton,
+}
+
 option SafehousePlus.MultipleSafehouse
 {
     type = boolean,

@@ -6,4 +6,10 @@ Sandbox_PTBR = {
     
     Sandbox_SafehousePlus_MemberLimit = "Limite de Membros",
     Sandbox_SafehousePlus_MemberLimit_tooltip = "Define o limite de membros máximo de cada facção. <LINE> Se definido como zero o limite é desabilitado.",
+
+    Sandbox_SafehousePlus_ShowTicketsButton = "Mostrar Tickets",
+    Sandbox_SafehousePlus_ShowTicketsButton_tooltip = "Mostra ou oculta o botão de tickets no painel do cliente.",
+
+    Sandbox_SafehousePlus_ShowServerOptionsButton = "Mostrar Opções do Servidor",
+    Sandbox_SafehousePlus_ShowServerOptionsButton_tooltip = "Mostra ou oculta o botão de opções do servidor <LINE> no painel do cliente.",
 }

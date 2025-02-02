@@ -6,4 +6,10 @@ Sandbox_EN = {
 
     Sandbox_SafehousePlus_MemberLimit = "Member Limit",
     Sandbox_SafehousePlus_MemberLimit_tooltip = "Sets the maximum member limit for each faction. <LINE> If set to zero, the limit is disabled.",
+
+    Sandbox_SafehousePlus_ShowTicketsButton = "Show Tickets",
+    Sandbox_SafehousePlus_ShowTicketsButton_tooltip = "Shows or hides the tickets button in the client panel.",
+
+    Sandbox_SafehousePlus_ShowServerOptionsButton = "Show Server Options",
+    Sandbox_SafehousePlus_ShowServerOptionsButton_tooltip = "Shows or hides the server options button <LINE> in the client panel.",
 }

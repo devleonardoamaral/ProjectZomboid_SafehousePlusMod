@@ -45,7 +45,29 @@ function ISUserPanelUI:initialise()
     self.safehouseBtn:instantiate()
     self.safehouseBtn.borderColor = self.buttonBorderColor
     self:addChild(self.safehouseBtn)
-    y = y + btnHgt + 25
+    y = y + btnHgt + 5
+
+    if SandboxVars.SafehousePlus.ShowTicketsButton then
+        self.ticketsBtn = ISButton:new(UIUtils.centerWidget(btnWid, self.width), y, btnWid, btnHgt, getText("UI_userpanel_tickets"), self, ISUserPanelUI.onOptionMouseDown)
+        self.ticketsBtn.internal = "TICKETS"
+        self.ticketsBtn:initialise()
+        self.ticketsBtn:instantiate()
+        self.ticketsBtn.borderColor = self.buttonBorderColor
+        self:addChild(self.ticketsBtn)
+        y = y + btnHgt + 5
+    end
+
+    if SandboxVars.SafehousePlus.ShowServerOptionsButton then
+        self.serverOptionBtn = ISButton:new(UIUtils.centerWidget(btnWid, self.width), y, btnWid, btnHgt, getText("IGUI_AdminPanel_SeeServerOptions"), self, ISUserPanelUI.onOptionMouseDown)
+        self.serverOptionBtn.internal = "SERVEROPTIONS"
+        self.serverOptionBtn:initialise()
+        self.serverOptionBtn:instantiate()
+        self.serverOptionBtn.borderColor = self.buttonBorderColor
+        self:addChild(self.serverOptionBtn)
+        y = y + btnHgt + 5
+    end
+
+    y = y + 20
 
     self.showSelfUsername = ISTickBox:new(UIUtils.centerWidget(tickBoxWdt, self.width), y, tickBoxWdt, tickBoxHgt, showSelfUsernameText, self, ISUserPanelUI.onShowSelfUsername)
     self.showSelfUsername:initialise()
@@ -160,9 +182,8 @@ function ISUserPanelUI:onOptionMouseDown(button, x, y)
         self.playerSafehousesUI = ISPlayerSafehousesUI:new(self.player)
         self.playerSafehousesUI:initialise()
         self.playerSafehousesUI:addToUIManager()
-    end
 
-    if button.internal == "FACTIONPANEL" then
+    elseif button.internal == "FACTIONPANEL" then
         if ISFactionUI.instance then
             ISFactionUI.instance:close()
         end
@@ -178,9 +199,24 @@ function ISUserPanelUI:onOptionMouseDown(button, x, y)
             modal:initialise()
             modal:addToUIManager()
         end
-    end
 
-    if button.internal == "CANCEL" then
+    elseif button.internal == "TICKETS" then
+        if ISTicketsUI.instance then
+            ISTicketsUI.instance:close()
+        end
+        local modal = ISTicketsUI:new(getCore():getScreenWidth() / 2 - 250, getCore():getScreenHeight() / 2 - 225, 500, 450, self.player);
+        modal:initialise();
+        modal:addToUIManager();
+    
+    elseif button.internal == "SERVEROPTIONS" then
+        if ISServerOptions.instance then
+            ISServerOptions.instance:close()
+        end
+        local ui = ISServerOptions:new(50,50,600,600, self.player)
+        ui:initialise();
+        ui:addToUIManager();
+
+    elseif button.internal == "CANCEL" then
         self:close()
     end
 end

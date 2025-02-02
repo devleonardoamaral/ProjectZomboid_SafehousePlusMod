@@ -1,3 +1,12 @@
 Tooltip_PTBR = {
     Tooltip_IGUI_UserPanel_SafehouseButton_Disabled = "Você não faz parte de nenhuma safehouse.",
+
+    Tooltip_SafehousePlus_AddMemberEntry_AlreadyInASafehouse = "%1 já é membro de outra safehouse.",
+    Tooltip_SafehousePlus_AddMemberEntry_WrongEntry = "Este não é um nome de usuário válido.",
+    Tooltip_SafehousePlus_AddMemberEntry_AlreadyIsMember = "%1 já é membro desta safehouse.",
+    Tooltip_SafehousePlus_AddMemberEntry_ReachedLimit = "A Safehouse atingiu o limite de membros.",
+
+    Tooltip_SafehousePlus_setNewOnwerEntry_isMember = "%1 não é membro desta safehouse.",
+    Tooltip_SafehousePlus_setNewOnwerEntry_isOnline = "É obrigatório %1 estar online para <LINE> transferir a propriedade.",
+    Tooltip_SafehousePlus_setNewOnwerEntry_isOwner = "%1 já é proprietário de outra safehouse.",
 }

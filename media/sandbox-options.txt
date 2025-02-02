@@ -1,0 +1,19 @@
+VERSION = 1,
+
+option SafehousePlus.MultipleSafehouse
+{
+    type = boolean,
+    default = true,
+    page = SafehousePlus,
+    translation = SafehousePlus_MultipleSafehouse,
+}
+
+option SafehousePlus.MemberLimit
+{
+    type = integer,
+    min = 0,
+    default = 0,
+    max = 999,
+    page = SafehousePlus,
+    translation = SafehousePlus_MemberLimit,
+}

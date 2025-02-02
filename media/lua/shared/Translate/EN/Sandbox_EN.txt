@@ -1,0 +1,9 @@
+Sandbox_EN = {
+    Sandbox_SafehousePlus = "SafehousePlus",
+
+    Sandbox_SafehousePlus_MultipleSafehouse = "Multiple Safehouses",
+    Sandbox_SafehousePlus_MultipleSafehouse_tooltip = "Defines whether members can be part of more than one safehouse.",
+
+    Sandbox_SafehousePlus_MemberLimit = "Member Limit",
+    Sandbox_SafehousePlus_MemberLimit_tooltip = "Sets the maximum member limit for each faction. <LINE> If set to zero, the limit is disabled.",
+}

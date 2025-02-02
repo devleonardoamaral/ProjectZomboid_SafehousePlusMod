@@ -18,8 +18,11 @@ IGUI_EN = {
    IGUI_ISSafehouseUI_NameLabel = "Safehouse Name",
    IGUI_ISSafehouseUI_OwnerLabel = "Owner",
    IGUI_ISSafehouseUI_MembersScrollListLabel = "Member List",
+   IGUI_ISSafehouseUI_SafehouseMembersLabel = "Members",
+   IGUI_ISSafehouseUI_SafehouseMembersUnlimitedLabel = "Unlimited",
 
    IGUI_ISSafehouseUI_ReloadButton = "Reload",
+   IGUI_ISSafehouseUI_TeleportButton = "Teleport",
    IGUI_ISSafehouseUI_AddMemberButton = "Add Member",
    IGUI_ISSafehouseUI_RemoveMemberButton = "Remove Member",
    IGUI_ISSafehouseUI_ExitSafehouseButton = "Exit Safehouse",

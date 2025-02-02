@@ -18,8 +18,11 @@ IGUI_PTBR = {
    IGUI_ISSafehouseUI_NameLabel = "Nome da Safehouse",
    IGUI_ISSafehouseUI_OwnerLabel = "Proprietário",
    IGUI_ISSafehouseUI_MembersScrollListLabel = "Lista de Membros",
+   IGUI_ISSafehouseUI_SafehouseMembersLabel = "Membros",
+   IGUI_ISSafehouseUI_SafehouseMembersUnlimitedLabel = "Ilimitado",
 
    IGUI_ISSafehouseUI_ReloadButton = "Atualizar",
+   IGUI_ISSafehouseUI_TeleportButton = "Teleportar",
    IGUI_ISSafehouseUI_AddMemberButton = "Adicionar Membro",
    IGUI_ISSafehouseUI_RemoveMemberButton = "Remover Membro",
    IGUI_ISSafehouseUI_ExitSafehouseButton = "Sair da Safehouse",

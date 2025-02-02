@@ -1,0 +1,9 @@
+Sandbox_PTBR = {
+    Sandbox_SafehousePlus = "SafehousePlus",
+
+    Sandbox_SafehousePlus_MultipleSafehouse = "Multiplas Safehouses",
+    Sandbox_SafehousePlus_MultipleSafehouse_tooltip = "Define se os membros podem estar em mais de uma safehouse.",
+    
+    Sandbox_SafehousePlus_MemberLimit = "Limite de Membros",
+    Sandbox_SafehousePlus_MemberLimit_tooltip = "Define o limite de membros máximo de cada facção. <LINE> Se definido como zero o limite é desabilitado.",
+}

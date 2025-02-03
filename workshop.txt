@@ -1,6 +1,39 @@
 version=1
-title=SafehousePlus
-id=SafehousePlues
+id=3419955629
+title=SafehousePlus [B41]
+description=[h1]How does it work?[/h1]  
+description=SafehousePlus is a complete overhaul of the game's safehouse system, adding numerous new features and customization options. With a redesigned and clean interface, players can join and manage multiple safehouses simultaneously without needing to travel to them to add friends?no need to even be online. The mod allows adjusting the member limit per base, fixes bugs (such as owning infinite safehouses), and introduces real-time visualization of safehouse boundaries, preventing constructions outside the protected area.
 description=
-tags=
+description=[h1]Key Features![/h1]  
+description=[list]  
+description=[*][b]Modern and Intuitive Interface:[/b] Redesigned menus for easier safehouse management, with a clean and modern look.  
+description=[*][b]Multiple Safehouses Simultaneously:[/b] Join multiple bases at once! Perfect for alliances and players who enjoy having tea with their neighbors.  
+description=[*][b]Bug Fixes:[/b] Resolves the multiplayer issue that allowed a player to own infinite safehouses through property transfer.  
+description=[*][b]Protected Area Visualization:[/b] See the exact boundaries of the safehouse on the ground! Avoid accidentally building outside the protected territory.  
+description=[*][b]Fully Flexible Sandbox Settings:[/b] Customize rules such as the maximum number of players per safehouse, enable or disable the multiple safehouses feature, and other adjustable sandbox permissions.  
+description=[*][b]Remote Base Access:[/b] Manage [i]all your safehouses[/i] directly from the client panel, without needing to travel to them.  
+description=[*][b]*BONUS* Immersive Mode:[/b] Hide your username for a more realistic roleplay experience.  
+description=[/list]  
+description=
+description=[h1]Incompatibilities[/h1]  
+description=Compatible only with Version 41.X.X.  
+description=
+description=[b]May conflict with mods that:[/b] Modify or depend on safehouse management windows and the client panel (e.g., UI or HUD mods).  
+description=
+description=[h1]Author's Notes:[/h1]  
+description=This mod was developed with great care and dedication for our [url=https://discord.gg/zqJUS7WvMv]?ltima Esperan?a[/url] community?thank you for all your support!?and I believe it?s a mod that will help many other communities, which is why I?m making it public for the entire Project Zomboid community.  
+description=
+description=If you enjoyed the mod and would like to support my work, feel free to contact me for more information on how to contribute. Your support helps me continue developing new things for the game!  
+description=
+description=Feedback and suggestions are extremely welcome. Leave your rating and comments to help improve the mod!  
+description=
+description=[url=https://theindiestone.com/forums/index.php/topic/2530-mod-permissions/?p=36478][img]https://i.imgur.com/rpteN65.png[/img][/url][quote] This mod can only be added to and extended with the express permission of the original creator. After receiving permission, credit must be given to the original creator, both in the mod files and anywhere the mod is made available online. [/quote]  
+description=
+description=[url=https://ko-fi.com/V7V0Y4HE7][img]https://storage.ko-fi.com/cdn/kofi3.png?v=3[/img][/url]  
+description=
+description=Translated into EN and PTBR.  
+description=
+description=[b]Workshop ID:[/b] 3419955629  
+description=[b]Mod ID:[/b] SafehousePlus  
+tags=Build 41;Interface;Multiplayer
 visibility=public

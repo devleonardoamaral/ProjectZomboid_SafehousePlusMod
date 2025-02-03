@@ -755,6 +755,7 @@ function ISSafehouseUI:addMemberButtonAction()
     self:updateScrollableMemberList()
     self:updateMemberLimitLabel()
     self.safehouse:syncSafehouse()
+    self.AddMemberButton.enable = false
     self.AddMemberEntry:setText("")
     self.AddMemberEntry:setValid(true)
 end

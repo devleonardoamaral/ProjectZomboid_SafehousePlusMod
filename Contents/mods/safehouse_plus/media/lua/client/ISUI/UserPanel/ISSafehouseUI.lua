@@ -320,17 +320,23 @@ end
 function ISSafehouseUI:removeMember(playerName)
     if not getServerOptions():getBoolean("SafehouseAllowTrepass") then
         local players = getOnlinePlayers()
+        
         for i=0, players:size() - 1 do
             local player = players:get(i)
+            local pX = math.floor(player:getX())
+            local py = math.floor(player:getY())
 
             if player:getUsername() == playerName then
-                if player:getX() >= self.safehouse:getX() - 1 and player:getX() < self.safehouse:getX2() + 1 and player:getY() >= self.safehouse:getY() - 1 and player:getY() < self.safehouse:getY2() + 1 then
+                print("player: " .. tostring(pX) .. ", " .. tostring(py))
+                print("Safe: " .. tostring(self.x1) .. ", " .. tostring(self.y1) .. "; " .. tostring(self.x2) .. ", " .. tostring(self.y2))
+                if pX >= self.x1 and pX <= self.x2 and py >= self.y1 and py <= self.y2 then
                     self.safehouse:kickOutOfSafehouse(player)
                     break
                 end
             end
         end
     end
+
     self.safehouse:removePlayer(playerName)
     self:updateScrollableMemberList()
 end

@@ -11,5 +11,11 @@ Sandbox_EN = {
     Sandbox_SafehousePlus_ShowTicketsButton_tooltip = "Shows or hides the tickets button in the client panel.",
 
     Sandbox_SafehousePlus_ShowServerOptionsButton = "Show Server Options",
-    Sandbox_SafehousePlus_ShowServerOptionsButton_tooltip = "Shows or hides the server options button <LINE> in the client panel.",
+    Sandbox_SafehousePlus_ShowServerOptionsButton_tooltip = "Shows or hides the server options button in the client panel.",
+
+    Sandbox_SafehousePlus_FloorHighlightOnClaimUIOpen = "Highlight Floor When Claiming",
+    Sandbox_SafehousePlus_FloorHighlightOnClaimUIOpen_tooltip = "Defines whether the claim UI should default to having the floor highlight feature enabled.",
+
+    Sandbox_SafehousePlus_MaxSafehouseSize = "Maximum Safehouse Size",
+    Sandbox_SafehousePlus_MaxSafehouseSize_tooltip = "Sets the maximum width and height of the safehouse that players can claim. <LINE> WARNING: High values may cause performance drops when opening the claim window!",
 }

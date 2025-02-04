@@ -710,8 +710,8 @@ function ISSafehouseUI:drawSafehouseLimits()
 
     local x1 = self.x1
     local y1 = self.y1
-    local x2 = self.x2 - 1
-    local y2 = self.y2 - 1
+    local x2 = self.x2
+    local y2 = self.y2
 
     local r = self.highlightColor.r
     local g = self.highlightColor.g
@@ -875,8 +875,8 @@ function ISSafehouseUI:new(x, y, width, height, safehouse, player)
 
     o.x1 = o.safehouse:getX()
     o.y1 = o.safehouse:getY()
-    o.x2 = o.safehouse:getX2()
-    o.y2 = o.safehouse:getY2()
+    o.x2 = o.safehouse:getX2() - 1
+    o.y2 = o.safehouse:getY2() - 1
 
     -- Garantir que x1 < x2 e y1 < y2
     if o.x1 > o.x2 then
@@ -886,7 +886,7 @@ function ISSafehouseUI:new(x, y, width, height, safehouse, player)
         o.y1, o.y2 = o.y2, o.y1
     end
 
-    o.safehouseSize = (o.x2 - o.x1) * (o.y2 - o.y1) 
+    o.safehouseSize = (o.x2 + 1 - o.x1) * (o.y2 + 1 - o.y1) 
 
     o.width = width
     o.height = height
@@ -912,7 +912,3 @@ end
 Events.OnSafehousesChanged.Add(ISSafehouseUI.OnSafehousesChanged)
 Events.OnPlayerDeath.Add(ISSafehouseUI.closeAllInstances)
 
--- local p = getPlayer(); local sq = p:getCurrentSquare(); local objs = sq:getObjects(); for i = 0, objs:size() - 1 do objs:get(i):setHighlightColor(1,0,0,1);objs:get(i):setHighlighted(true) end
--- local p = getPlayer(); local sq = p:getCurrentSquare(); local s = SafeHouse.getSafeHouse(sq); s:addPlayer("debora"); s:syncSafehouse()
--- reloadLuaFile("/home/leonardoamaral/Zomboid/mods/project_zomboid_safehouse_plus/media/lua/client/ISUI/UserPanel/ISSafehouseUI.lua")
--- SandboxVars.SafehousePlus.MultipleSafehouse

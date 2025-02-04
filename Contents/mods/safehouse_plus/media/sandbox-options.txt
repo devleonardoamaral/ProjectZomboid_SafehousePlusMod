@@ -33,3 +33,21 @@ option SafehousePlus.MemberLimit
     page = SafehousePlus,
     translation = SafehousePlus_MemberLimit,
 }
+
+option SafehousePlus.FloorHighlighOnClaimUIOpen
+{
+    type = boolean,
+    default = true,
+    page = SafehousePlus,
+    translation = SafehousePlus_FloorHighlighOnClaimUIOpen,
+}
+
+option SafehousePlus.MaxSafehouseSize
+{
+    type = integer,
+    min = 5,
+    default = 40,
+    max = 300,
+    page = SafehousePlus,
+    translation = SafehousePlus_MaxSafehouseSize,
+}

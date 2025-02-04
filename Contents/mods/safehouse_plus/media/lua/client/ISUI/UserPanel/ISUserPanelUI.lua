@@ -1,6 +1,7 @@
 require "ISUI/ISPanel"
 require "ISUI/UserPanel/SP_ISPlayerSafehousesUI"
-UIUtils = require("ISUI/SP_UIUtils")
+require "ISUI/UserPanel/SP_ISClaimSafehouseUI"
+local UIUtils = require("ISUI/SP_UIUtils")
 
 
 ISUserPanelUI = ISPanel:derive("ISUserPanelUI")
@@ -23,8 +24,8 @@ function ISUserPanelUI:initialise()
     local showConnectionInfoWidth = UIUtils.measureTextX(UIFont.Small, showConnectionInfoText) + 20
     local showServerInfoInfoText = getText("IGUI_UserPanel_ShowServerInfo")
     local showServerInfoInfoWidth = UIUtils.measureTextX(UIFont.Small, showServerInfoInfoText) + 20
-    local howPingInfoInfoText = getText("IGUI_UserPanel_ShowPingInfo")
-    local howPingInfoInfoWidth = UIUtils.measureTextX(UIFont.Small, howPingInfoInfoText) + 20
+    local showPingInfoInfoText = getText("IGUI_UserPanel_ShowPingInfo")
+    local howPingInfoInfoWidth = UIUtils.measureTextX(UIFont.Small, showPingInfoInfoText) + 20
 
     local tickBoxWdt = math.max(showConnectionInfoWidth, showServerInfoInfoWidth, howPingInfoInfoWidth, showSelfUsernameWidth)
 
@@ -93,11 +94,11 @@ function ISUserPanelUI:initialise()
     self:addChild(self.showServerInfo)
     y = y + tickBoxHgt + 5
 
-    self.showPingInfo = ISTickBox:new(UIUtils.centerWidget(tickBoxWdt, self.width), y, tickBoxWdt, tickBoxHgt, howPingInfoInfoText, self, ISUserPanelUI.onShowPingInfo)
+    self.showPingInfo = ISTickBox:new(UIUtils.centerWidget(tickBoxWdt, self.width), y, tickBoxWdt, tickBoxHgt, showPingInfoInfoText, self, ISUserPanelUI.onShowPingInfo)
     self.showPingInfo:initialise()
     self.showPingInfo:instantiate()
     self.showPingInfo.selected[1] = isShowPingInfo()
-    self.showPingInfo:addOption(howPingInfoInfoText)
+    self.showPingInfo:addOption(showPingInfoInfoText)
     self:addChild(self.showPingInfo)
     y = y + tickBoxHgt + 25
 
@@ -149,6 +150,7 @@ function ISUserPanelUI:updateFactionButton()
 end
 
 function ISUserPanelUI:updateSafehouseButton()
+    --[[
     if SafeHouse.hasSafehouse(self.player) then
         self.safehouseBtn.enable = true
         self.safehouseBtn.tooltip = nil
@@ -156,6 +158,7 @@ function ISUserPanelUI:updateSafehouseButton()
         self.safehouseBtn.enable = false
         self.safehouseBtn.tooltip = getText("Tooltip_IGUI_UserPanel_SafehouseButton_Disabled")
     end
+    --]]
 end
 
 function ISUserPanelUI:render()
@@ -182,6 +185,7 @@ function ISUserPanelUI:onOptionMouseDown(button, x, y)
         self.playerSafehousesUI = ISPlayerSafehousesUI:new(self.player)
         self.playerSafehousesUI:initialise()
         self.playerSafehousesUI:addToUIManager()
+        self:close()
 
     elseif button.internal == "FACTIONPANEL" then
         if ISFactionUI.instance then
@@ -199,6 +203,7 @@ function ISUserPanelUI:onOptionMouseDown(button, x, y)
             modal:initialise()
             modal:addToUIManager()
         end
+        self:close()
 
     elseif button.internal == "TICKETS" then
         if ISTicketsUI.instance then
@@ -207,6 +212,7 @@ function ISUserPanelUI:onOptionMouseDown(button, x, y)
         local modal = ISTicketsUI:new(getCore():getScreenWidth() / 2 - 250, getCore():getScreenHeight() / 2 - 225, 500, 450, self.player);
         modal:initialise();
         modal:addToUIManager();
+        self:close()
     
     elseif button.internal == "SERVEROPTIONS" then
         if ISServerOptions.instance then
@@ -215,6 +221,7 @@ function ISUserPanelUI:onOptionMouseDown(button, x, y)
         local ui = ISServerOptions:new(50,50,600,600, self.player)
         ui:initialise();
         ui:addToUIManager();
+        self:close()
 
     elseif button.internal == "CANCEL" then
         self:close()
@@ -238,8 +245,14 @@ function ISUserPanelUI:new(x, y, width, height, player)
         ISUserPanelUI.instance:close()
     end
 
+    width = 240
+    height = 280
+
+    x = getCore():getScreenWidth() * 0.1
+    y = getCore():getScreenHeight() * 0.25
+
     local o = {}
-    o = ISPanel:new(x, y, 240, 280)
+    o = ISPanel:new(x, y, width, height)
     setmetatable(o, self)
     self.__index = self
     self.player = player

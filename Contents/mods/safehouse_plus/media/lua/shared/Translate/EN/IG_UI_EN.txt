@@ -10,6 +10,7 @@ IGUI_EN = {
    IGUI_ISPlayerSafehousesUI_ItemOwner = "Owner",
    IGUI_ISPlayerSafehousesUI_ItemCoord = "Coordinates",
    IGUI_ISPlayerSafehousesUI_FilterLabel = "Filter",
+   IGUI_ISPlayerSafehousesUI_ClaimButton = "CLAIM SAFEHOUSE",
 
    IGUI_ISSafehouseUI_Title = "SAFEHOUSE",
 
@@ -33,4 +34,19 @@ IGUI_EN = {
 
    IGUI_ISSafehouseUI_Dialog_OwnerChange = "Owner changed!",
    IGUI_ISSafehouseUI_Dialog_SafehouseNameChange = "Safehouse name changed!",
+
+   IGUI_ISClaimSafehousesUI_Title = "CLAIM MENU",
+   IGUI_ISClaimSafehousesUI_ClaimButton = "CLAIM",
+   IGUI_ISClaimSafehousesUI_VerifyButton = "CHECK AVAILABILITY",
+
+   IGUI_ISClaimSafehousesUI_SuccessStatus = "This safehouse is available",
+   IGUI_ISClaimSafehousesUI_FailStatus = "You are not in a safehouse",
+   
+   IGUI_ISClaimSafehousesUI_OverlapStatus = "This location overlaps with a safehouse",
+   IGUI_ISClaimSafehousesUI_EmptyStatus = "This location is not empty",
+   IGUI_ISClaimSafehousesUI_ResidentialStatus = "This is not a residential location",
+   IGUI_ISClaimSafehousesUI_SpawnStatus = "This is a spawn location",
+   IGUI_ISClaimSafehousesUI_isTooBigStatus = "This location is too big",
+   IGUI_ISClaimSafehousesUI_isMemberStatus = "You are already a member of a safehouse",
+   IGUI_ISClaimSafehousesUI_isOwnerStatus = "You are already the owner of a safehouse",
 }

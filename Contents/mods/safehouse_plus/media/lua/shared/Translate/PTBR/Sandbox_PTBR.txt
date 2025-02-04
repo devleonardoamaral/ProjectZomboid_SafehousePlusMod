@@ -11,5 +11,11 @@ Sandbox_PTBR = {
     Sandbox_SafehousePlus_ShowTicketsButton_tooltip = "Mostra ou oculta o botão de tickets no painel do cliente.",
 
     Sandbox_SafehousePlus_ShowServerOptionsButton = "Mostrar Opções do Servidor",
-    Sandbox_SafehousePlus_ShowServerOptionsButton_tooltip = "Mostra ou oculta o botão de opções do servidor <LINE> no painel do cliente.",
+    Sandbox_SafehousePlus_ShowServerOptionsButton_tooltip = "Mostra ou oculta o botão de opções do servidor no painel do cliente.",
+
+    Sandbox_SafehousePlus_FloorHighlighOnClaimUIOpen = "Destacar Piso ao Reivindicar",
+    Sandbox_SafehousePlus_FloorHighlighOnClaimUIOpen_tooltip = "Define se por padrão a UI de reivindicação deve iniciar com o recurso de destacar o piso ligado.",
+
+    Sandbox_SafehousePlus_MaxSafehouseSize = "Tamanho Máximo Safehouse",
+    Sandbox_SafehousePlus_MaxSafehouseSize_tooltip = "Define a largura e altura máxima da safehouse que os jogadores poderão reivindicar. <LINE> CUIDADO: valores altos podem causar queda de desempenho ao abrir a janela de claim!",
 }

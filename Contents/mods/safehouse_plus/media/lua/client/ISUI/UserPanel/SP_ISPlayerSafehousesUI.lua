@@ -4,9 +4,9 @@ require "ISUI/ISLabel"
 require "ISUI/ISScrollingListBox"
 require "ISUI/ISTextEntryBox"
 
-UIUtils = require("ISUI/SP_UIUtils")
+local UIUtils = require("ISUI/SP_UIUtils")
 
-ISPlayerSafehousesUI = ISPanel:derive("ISSafehousesList")
+ISPlayerSafehousesUI = ISPanel:derive("ISPlayerSafehousesUI")
 
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
@@ -17,6 +17,7 @@ function ISPlayerSafehousesUI:initialise()
 
     local padX = 20
     local padY = 20
+    local shortPadY = padY / 2
     local btnWid = (self.width / 2) - (padX * 1.5)
     local btnHgt = math.max(25, FONT_HGT_SMALL + 6)
 
@@ -35,7 +36,7 @@ function ISPlayerSafehousesUI:initialise()
     self.datas.onMouseDown = ISPlayerSafehousesUI.onListBoxMouseDown
     self.datas:setOnMouseDownFunction(self, ISPlayerSafehousesUI.showSafehouseUI)
     self:addChild(self.datas)
-    y = y + datasHeight + padY
+    y = y + datasHeight + shortPadY
 
     local filterLabelHeight = UIUtils.measureFontY(UIFont.Small) + 4
     self.filterLabel = ISLabel:new(padX, y, filterLabelHeight, getText("IGUI_ISPlayerSafehousesUI_FilterLabel") .. ":", 1,1,1,1, UIFont.Small, true)
@@ -44,10 +45,20 @@ function ISPlayerSafehousesUI:initialise()
     self:addChild(self.filterLabel)
     y = y + filterLabelHeight
 
-    self.filterEntry = ISTextEntryBox:new("",padX, y, btnWid, btnHgt)
+    self.filterEntry = ISTextEntryBox:new("", padX, y, btnWid, btnHgt)
     self.filterEntry:initialise()
     self.filterEntry:instantiate()
     self:addChild(self.filterEntry)
+
+    self.claimButton = ISButton:new(self.width - btnWid - padX, y, btnWid, btnHgt, getText("IGUI_ISPlayerSafehousesUI_ClaimButton"), self, nil, ISPlayerSafehousesUI.onOptionMouseDown)
+    self.claimButton.internal = "CLAIM"
+    self.claimButton.backgroundColor = {r=0, g=0.3, b=0, a=0.8}
+    self.claimButton.backgroundColorMouseOver = {r=0, g=0.6, b=0, a=0.8}
+    self.claimButton:initialise()
+    self.claimButton:instantiate()
+    self.claimButton.borderColor = self.buttonBorderColor
+    self:addChild(self.claimButton)
+    y = y + btnHgt + shortPadY
 
     self.cancel = ISButton:new(self.width - btnWid - padX, y, btnWid, btnHgt, getText("UI_btn_close"), self, nil, ISPlayerSafehousesUI.onOptionMouseDown)
     self.cancel.internal = "CANCEL"
@@ -233,6 +244,12 @@ function ISPlayerSafehousesUI:onOptionMouseDown(button, x, y)
         self:close()
     elseif button.internal == "VIEW" then
         self:showSafehouseUI(self, self.datas.items[self.datas.selected].item)
+    elseif button.internal == "CLAIM" then
+        local claimUI = ISClaimSafehouseUI:new(self.player)
+        claimUI:initialise()
+        claimUI:addToUIManager()
+        claimUI:bringToTop()
+        self:close()
     end
 end
 
@@ -257,8 +274,8 @@ function ISPlayerSafehousesUI:new(player)
     local width = 700
     local height = 550
 
-    x = (getCore():getScreenWidth() - width) / 2
-    y = (getCore():getScreenHeight() - height) / 2
+    local x = (getCore():getScreenWidth() - width) / 2
+    local y = (getCore():getScreenHeight() - height) / 2
 
     o = ISPanel:new(x, y, width, height)
     setmetatable(o, self)
@@ -281,5 +298,3 @@ function ISPlayerSafehousesUI:new(player)
 end
 
 Events.OnPlayerDeath.Add(ISPlayerSafehousesUI.OnPlayerDeath)
-
--- local p = getPlayer(); local sq = p:getCurrentSquare(); local s = SafeHouse.getSafeHouse(sq); print(s:playerAllowed(p))

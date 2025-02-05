@@ -327,8 +327,6 @@ function ISSafehouseUI:removeMember(playerName)
             local py = math.floor(player:getY())
 
             if player:getUsername() == playerName then
-                print("player: " .. tostring(pX) .. ", " .. tostring(py))
-                print("Safe: " .. tostring(self.x1) .. ", " .. tostring(self.y1) .. "; " .. tostring(self.x2) .. ", " .. tostring(self.y2))
                 if pX >= self.x1 and pX <= self.x2 and py >= self.y1 and py <= self.y2 then
                     self.safehouse:kickOutOfSafehouse(player)
                     break

@@ -36,16 +36,6 @@ function ISClaimSafehouseUI:initialise()
     self:addChild(self.StatusLabel)
     y = y + statusLabelHeight + (padY * 1.5)
 
-    --[[
-    self.verifyButton = ISButton:new(padX, y, btnWid, btnHgt, getText("IGUI_ISClaimSafehousesUI_VerifyButton"), self, ISClaimSafehouseUI.onOptionMouseDown)
-    self.verifyButton.internal = "VERIFY"
-    self.verifyButton:initialise()
-    self.verifyButton:instantiate()
-    self.verifyButton.enable = false
-    self.verifyButton.borderColor = self.buttonBorderColor
-    self:addChild(self.verifyButton)
-    --]]
-
     local showHighlightTickBoxText = getText("IGUI_SafehouseUI_SafehouseLimits")
     local showHighlightTickBoxWidth = UIUtils.measureTextX(UIFont.Small, showHighlightTickBoxText) + 18
     self.showHighlightTickBox = ISTickBox:new(UIUtils.centerWidget(showHighlightTickBoxWidth, self.width), y, showHighlightTickBoxWidth, 18, "", self, ISClaimSafehouseUI.onClickShowHighlight);
@@ -109,10 +99,6 @@ function ISClaimSafehouseUI:onOptionMouseDown(button, x, y)
         safehouseUI:addToUIManager()
         safehouseUI:bringToTop()
         self:close()
-    --[[
-    elseif button.internal == "VERIFY" then
-        self:updateData()
-    --]]
     elseif button.internal == "CANCEL" then
         self:close()
     end
@@ -186,7 +172,7 @@ function ISClaimSafehouseUI:isMemberOrOwner()
     self.isMember = false
     self.isOwner = false
 
-    if self.player:isAccessLevel("admin") then
+    if not self.isAdmin then
         local safehouses = SafeHouse.getSafehouseList()
         local playerName = self.player:getUsername()
 
@@ -217,7 +203,7 @@ function ISClaimSafehouseUI:updateData()
     self.isMember = false
     self.isOwner = false
 
-    if self.player:isAccessLevel("admin") then
+    if not self.isAdmin then
         local safehouses = SafeHouse.getSafehouseList()
         local playerName = self.player:getUsername()
 
@@ -427,6 +413,8 @@ function ISClaimSafehouseUI:new(player)
     self.__index = self
 
     o.player = player
+    o.isAdmin = o.player:isAccessLevel("admin")
+
     o.gridSquare = nil
 
     o.variableColor={r=0.9, g=0.55, b=0.1, a=1}

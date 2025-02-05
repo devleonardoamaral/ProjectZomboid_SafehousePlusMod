@@ -129,7 +129,7 @@ function ISPlayerSafehousesUI:doDrawItem(y, item, alt)
     
     local label = getText("IGUI_ISPlayerSafehousesUI_ItemCoord") .. ": "
     local labelWidth = UIUtils.measureTextX(UIFont.NewSmall, label)
-    local text = tostring(safe:getX()) .. "," .. tostring(safe:getY()) .. " x " .. tostring(safe:getX2()) .. "," .. tostring(safe:getY2())
+    local text = tostring(safe:getX()) .. "," .. tostring(safe:getY()) .. " x " .. tostring(safe:getX2() - 1) .. "," .. tostring(safe:getY2() - 1)
     local textWidth = UIUtils.measureTextX(self.font, text)
     x = self:getWidth() - 225
 

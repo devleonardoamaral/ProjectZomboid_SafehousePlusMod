@@ -266,6 +266,12 @@ function ISPlayerSafehousesUI.OnPlayerDeath()
     end
 end
 
+function ISPlayerSafehousesUI.OnSafehousesChanged()
+    if ISPlayerSafehousesUI.instance then
+        ISPlayerSafehousesUI.instance:populateList()
+    end
+end
+
 function ISPlayerSafehousesUI:new(player)
     if ISPlayerSafehousesUI.instance then
         ISPlayerSafehousesUI.instance:close()
@@ -298,3 +304,4 @@ function ISPlayerSafehousesUI:new(player)
 end
 
 Events.OnPlayerDeath.Add(ISPlayerSafehousesUI.OnPlayerDeath)
+Events.OnSafehousesChanged.Add(ISPlayerSafehousesUI.OnSafehousesChanged)

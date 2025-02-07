@@ -18,7 +18,6 @@ IGUI_EN = {
    IGUI_ISSafehouseUI_SizeLabel = "Size",
    IGUI_ISSafehouseUI_NameLabel = "Safehouse Name",
    IGUI_ISSafehouseUI_OwnerLabel = "Owner",
-   IGUI_ISSafehouseUI_MembersScrollListLabel = "Member List",
    IGUI_ISSafehouseUI_SafehouseMembersLabel = "Members",
    IGUI_ISSafehouseUI_SafehouseMembersUnlimitedLabel = "Unlimited",
 

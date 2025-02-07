@@ -18,7 +18,6 @@ IGUI_PTBR = {
    IGUI_ISSafehouseUI_SizeLabel = "Tamanho",
    IGUI_ISSafehouseUI_NameLabel = "Nome da Safehouse",
    IGUI_ISSafehouseUI_OwnerLabel = "Proprietário",
-   IGUI_ISSafehouseUI_MembersScrollListLabel = "Lista de Membros",
    IGUI_ISSafehouseUI_SafehouseMembersLabel = "Membros",
    IGUI_ISSafehouseUI_SafehouseMembersUnlimitedLabel = "Ilimitado",
 

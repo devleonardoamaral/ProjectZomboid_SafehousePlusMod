@@ -10,7 +10,7 @@ IGUI_PTBR = {
    IGUI_ISPlayerSafehousesUI_ItemOwner = "Proprietário",
    IGUI_ISPlayerSafehousesUI_ItemCoord = "Coordenadas",
    IGUI_ISPlayerSafehousesUI_FilterLabel = "Filtrar",
-   IGUI_ISPlayerSafehousesUI_ClaimButton = "Menu de Reivindicação",
+   IGUI_ISPlayerSafehousesUI_ClaimButton = "REIVINDICAR SAFEHOUSE",
 
    IGUI_ISSafehouseUI_Title = "SAFEHOUSE",
 

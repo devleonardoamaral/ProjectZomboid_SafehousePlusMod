@@ -15,42 +15,90 @@ local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 function ISPlayerSafehousesUI:initialise()
     ISPanel.initialise(self)
 
-    local padX = 20
-    local padY = 20
-    local shortPadY = padY / 2
-    local btnWid = (self.width / 2) - (padX * 1.5)
-    local btnHgt = math.max(25, FONT_HGT_SMALL + 6)
-
     local y = 70
+    
+    self.padX = 20
+    self.padY = 20
+    self.shortPadX = self.padX / 2
+    self.shortPadY = self.padY / 2
 
-    local datasWidth = self.width - (padX * 2)
-    local datasHeight = 365
-    self.datas = ISScrollingListBox:new(UIUtils.centerWidget(datasWidth, self.width), y, datasWidth, datasHeight)
-    self.datas:initialise()
-    self.datas:instantiate()
-    self.datas:setFont(UIFont.Small, 8)
-    self.datas.selected = 0
-    self.datas.joypadParent = self
-    self.datas.doDrawItem = self.doDrawItem
-    self.datas.drawBorder = true
-    self.datas.onMouseDown = ISPlayerSafehousesUI.onListBoxMouseDown
-    self.datas:setOnMouseDownFunction(self, ISPlayerSafehousesUI.showSafehouseUI)
-    self:addChild(self.datas)
-    y = y + datasHeight + shortPadY
+    self.buttonHeight = math.max(25, FONT_HGT_SMALL + 6)
+    self.listBoxHeight = getCore():getScreenHeight() / 3
+    self.labelHeight = FONT_HGT_SMALL + 4
+
+    self.claimButtonText = getText("IGUI_ISPlayerSafehousesUI_ClaimButton")
+    self.cancelButtonText = getText("UI_btn_close")
+    self.filterEntryLabelText = getText("IGUI_ISPlayerSafehousesUI_FilterLabel") .. ":"
+
+    self.safehousesListBoxItemNameLabel = getText("IGUI_ISPlayerSafehousesUI_ItemName") .. ": "
+    self.safehousesListBoxItemOwnerLabel = getText("IGUI_ISPlayerSafehousesUI_ItemOwner") .. ": "
+    self.safehousesListBoxItemCoordLabel = getText("IGUI_ISPlayerSafehousesUI_ItemCoord") .. ": "
+
+    self.safehousesListBoxItemNameLabelWidth = UIUtils.measureTextX(UIFont.Small, self.safehousesListBoxItemNameLabel)
+    self.safehousesListBoxItemOwnerLabelWidth = UIUtils.measureTextX(UIFont.Small, self.safehousesListBoxItemOwnerLabel)
+    self.safehousesListBoxItemCoordLabelWidth = UIUtils.measureTextX(UIFont.Small, self.safehousesListBoxItemCoordLabel)
+
+    self.safehousesListBoxItemNameTextWidth = UIUtils.measureTextX(UIFont.Small, "XXXXXXXXXXXXXXXXXXXX")
+    self.safehousesListBoxItemOwnerTextWidth = UIUtils.measureTextX(UIFont.Small, "XXXXXXXXXXXXXXXXXXXX")
+    self.safehousesListBoxItemCoordTextWidth = UIUtils.measureTextX(UIFont.Small, "XXXXX,XXXXX x XXXXX,XXXXX")
+
+    self.buttonWidth = math.max(
+        UIUtils.measureTextX(UIFont.Small, self.claimButtonText),
+        UIUtils.measureTextX(UIFont.Small, self.cancelButtonText)
+    ) + 20
+
+    self.safehousesListBoxWidth = (
+        self.padX + (self.shortPadX * 2)
+        + self.safehousesListBoxItemNameLabelWidth
+        + self.safehousesListBoxItemCoordTextWidth
+        + self.safehousesListBoxItemOwnerLabelWidth
+        + self.safehousesListBoxItemOwnerTextWidth
+        + self.safehousesListBoxItemCoordLabelWidth
+        + self.safehousesListBoxItemCoordTextWidth
+    )
+
+    self.filterEntryWidth = self.safehousesListBoxWidth * 0.5
+    self:setWidth(self.safehousesListBoxWidth + (2 * self.padX))
 
     local filterLabelHeight = UIUtils.measureFontY(UIFont.Small) + 4
-    self.filterLabel = ISLabel:new(padX, y, filterLabelHeight, getText("IGUI_ISPlayerSafehousesUI_FilterLabel") .. ":", 1,1,1,1, UIFont.Small, true)
+    self.filterLabel = ISLabel:new(self.padX, y - filterLabelHeight, filterLabelHeight, self.filterEntryLabelText, 1,1,1,1, UIFont.Small, true)
     self.filterLabel:initialise()
     self.filterLabel:instantiate()
     self:addChild(self.filterLabel)
-    y = y + filterLabelHeight
 
-    self.filterEntry = ISTextEntryBox:new("", padX, y, btnWid, btnHgt)
+    self.filterEntry = ISTextEntryBox:new("", self.padX, y, self.filterEntryWidth, self.buttonHeight)
     self.filterEntry:initialise()
     self.filterEntry:instantiate()
     self:addChild(self.filterEntry)
+    y = y + self.buttonHeight + self.shortPadY
 
-    self.claimButton = ISButton:new(self.width - btnWid - padX, y, btnWid, btnHgt, getText("IGUI_ISPlayerSafehousesUI_ClaimButton"), self, nil, ISPlayerSafehousesUI.onOptionMouseDown)
+    self.safehousesListBox = ISScrollingListBox:new(self.padX, y, self.safehousesListBoxWidth, self.listBoxHeight)
+    self.safehousesListBox.shortPadX = self.shortPadX
+    self.safehousesListBox.itemTextColor = self.itemTextColor
+    self.safehousesListBox.itemNameLabel = self.safehousesListBoxItemNameLabel
+    self.safehousesListBox.itemOwnerLabel = self.safehousesListBoxItemOwnerLabel
+    self.safehousesListBox.itemCoordLabel = self.safehousesListBoxItemCoordLabel
+    self.safehousesListBox.itemNameLabelWidth = self.safehousesListBoxItemNameLabelWidth
+    self.safehousesListBox.itemOwnerLabelWidth = self.safehousesListBoxItemOwnerLabelWidth
+    self.safehousesListBox.itemCoordLabelWidth = self.safehousesListBoxItemCoordLabelWidth
+    self.safehousesListBox.itemNameTextWidth = self.safehousesListBoxItemNameTextWidth
+    self.safehousesListBox.itemOwnerTextWidth = self.safehousesListBoxItemOwnerTextWidth
+    self.safehousesListBox.itemCoordTextWidth = self.safehousesListBoxItemCoordTextWidth
+    self.safehousesListBox:initialise()
+    self.safehousesListBox:instantiate()
+    self.safehousesListBox:setFont(UIFont.Small, 8)
+    self.safehousesListBox.selected = 0
+    self.safehousesListBox.joypadParent = self
+    self.safehousesListBox.doDrawItem = self.doDrawItem
+    self.safehousesListBox.drawBorder = true
+    self.safehousesListBox.onMouseDown = ISPlayerSafehousesUI.onListBoxMouseDown
+    self.safehousesListBox:setOnMouseDownFunction(self, ISPlayerSafehousesUI.showSafehouseUI)
+    self:addChild(self.safehousesListBox)
+    y = y + self.listBoxHeight + self.padY
+
+    local rightButtonsXOffset = self.width - self.buttonWidth - self.padX
+
+    self.claimButton = ISButton:new(self.padX, y, self.buttonWidth, self.buttonHeight, self.claimButtonText, self, nil, ISPlayerSafehousesUI.onOptionMouseDown)
     self.claimButton.internal = "CLAIM"
     self.claimButton.backgroundColor = {r=0, g=0.3, b=0, a=0.8}
     self.claimButton.backgroundColorMouseOver = {r=0, g=0.6, b=0, a=0.8}
@@ -58,9 +106,8 @@ function ISPlayerSafehousesUI:initialise()
     self.claimButton:instantiate()
     self.claimButton.borderColor = self.buttonBorderColor
     self:addChild(self.claimButton)
-    y = y + btnHgt + shortPadY
 
-    self.cancel = ISButton:new(self.width - btnWid - padX, y, btnWid, btnHgt, getText("UI_btn_close"), self, nil, ISPlayerSafehousesUI.onOptionMouseDown)
+    self.cancel = ISButton:new(rightButtonsXOffset, y, self.buttonWidth, self.buttonHeight, self.cancelButtonText, self, nil, ISPlayerSafehousesUI.onOptionMouseDown)
     self.cancel.internal = "CANCEL"
     self.cancel.backgroundColor = {r=0.3, g=0, b=0, a=0.8}
     self.cancel.backgroundColorMouseOver = {r=0.6, g=0, b=0, a=0.8}
@@ -68,11 +115,10 @@ function ISPlayerSafehousesUI:initialise()
     self.cancel:instantiate()
     self.cancel.borderColor = self.buttonBorderColor
     self:addChild(self.cancel)
-    y = y + btnHgt + padY
+    y = y + self.buttonHeight + self.padY
 
     self:setHeight(y)
-    self.height = y
-
+    self:centerMiddle()
     self:populateList()
 end
 
@@ -105,37 +151,62 @@ function ISPlayerSafehousesUI:doDrawItem(y, item, alt)
 	self:drawRectBorder(0, y, self:getWidth(), item.height, 0.5, self.borderColor.r, self.borderColor.g, self.borderColor.b)
 
     local safe = item.item
-    local textPadX = 15
-    local x = textPadX
+    local x = self.shortPadX
 
-    local label = getText("IGUI_ISPlayerSafehousesUI_ItemName") .. ": "
-    local labelWidth = UIUtils.measureTextX(UIFont.NewSmall, label)
-	self:drawText(label, x, y + self.itemPadY, 1, 1, 1, 1, self.font)
-    x = x + labelWidth
+	self:drawText(
+        self.itemNameLabel, 
+        x, y + self.itemPadY, 
+        1, 1, 1, 1, 
+        self.font
+    )
+
+    x = x + self.itemNameLabelWidth
 
     local text = safe:getTitle()
-    local textWidth = UIUtils.measureTextX(self.font, text)
-    self:drawText(text, x, y + self.itemPadY, 0.9, 0.9, 0.9, 0.9, self.font)
-    x = self:getWidth() / 3
+    self:drawText(
+        text, 
+        x, y + self.itemPadY, 
+        self.itemTextColor.r, self.itemTextColor.g, self.itemTextColor.b, self.itemTextColor.a, 
+        self.font
+    )
 
-    local label = getText("IGUI_ISPlayerSafehousesUI_ItemOwner") .. ": "
-    local labelWidth = UIUtils.measureTextX(UIFont.NewSmall, label)
-	self:drawText(label, x, y + self.itemPadY, 1, 1, 1, 1, self.font)
-    x = x + labelWidth
+    x = x + self.itemNameTextWidth + self.shortPadX
+
+    self:drawText(
+        self.itemOwnerLabel, 
+        x, y + self.itemPadY, 
+        1, 1, 1, 1, 
+        self.font
+    )
+
+    x = x + self.itemOwnerLabelWidth
 
     local text = safe:getOwner()
-    local textWidth = UIUtils.measureTextX(self.font, text)
-    self:drawText(text, x, y + self.itemPadY, 0.9, 0.9, 0.9, 0.9, self.font)
-    
-    local label = getText("IGUI_ISPlayerSafehousesUI_ItemCoord") .. ": "
-    local labelWidth = UIUtils.measureTextX(UIFont.NewSmall, label)
-    local text = tostring(safe:getX()) .. "," .. tostring(safe:getY()) .. " x " .. tostring(safe:getX2() - 1) .. "," .. tostring(safe:getY2() - 1)
-    local textWidth = UIUtils.measureTextX(self.font, text)
-    x = self:getWidth() - 225
+    self:drawText(
+        text, 
+        x, y + self.itemPadY, 
+        self.itemTextColor.r, self.itemTextColor.g, self.itemTextColor.b, self.itemTextColor.a, 
+        self.font
+    )
 
-	self:drawText(label, x, y + self.itemPadY, 1, 1, 1, 1, self.font)
-    x = x + labelWidth
-    self:drawText(text, x, y + self.itemPadY, 0.9, 0.9, 0.9, 0.9, self.font)
+    x = self.width - self.itemCoordLabelWidth - self.itemCoordTextWidth
+
+    self:drawText(
+        self.itemCoordLabel, 
+        x, y + self.itemPadY, 
+        1, 1, 1, 1, 
+        self.font
+    )
+
+    x = x + self.itemCoordLabelWidth
+
+    local text = tostring(safe:getX()) .. "," .. tostring(safe:getY()) .. " x " .. tostring(safe:getX2() - 1) .. "," .. tostring(safe:getY2() - 1)
+    self:drawText(
+        text, 
+        x, y + self.itemPadY, 
+        self.itemTextColor.r, self.itemTextColor.g, self.itemTextColor.b, self.itemTextColor.a, 
+        self.font
+    )
 
 	y = y + item.height
 	return y
@@ -165,7 +236,7 @@ function ISPlayerSafehousesUI:populateList(filter)
         filter = nil
     end
     
-    self.datas:clear()
+    self.safehousesListBox:clear()
     for i=0, SafeHouse.getSafehouseList():size() - 1 do
         local safe = SafeHouse.getSafehouseList():get(i)
         local safeOwner = string.lower(safe:getOwner())
@@ -177,10 +248,10 @@ function ISPlayerSafehousesUI:populateList(filter)
                 local findSafeName = safeName:find(filter, 1, true)
 
                 if findSafeOwner or findSafeName then
-                    self.datas:addItem(safeName, safe)
+                    self.safehousesListBox:addItem(safeName, safe)
                 end
             else
-                self.datas:addItem(safeName, safe)
+                self.safehousesListBox:addItem(safeName, safe)
             end
         end
     end
@@ -243,7 +314,7 @@ function ISPlayerSafehousesUI:onOptionMouseDown(button, x, y)
     if button.internal == "CANCEL" then
         self:close()
     elseif button.internal == "VIEW" then
-        self:showSafehouseUI(self, self.datas.items[self.datas.selected].item)
+        self:showSafehouseUI(self, self.safehousesListBox.items[self.safehousesListBox.selected].item)
     elseif button.internal == "CLAIM" then
         local claimUI = ISClaimSafehouseUI:new(self.player)
         claimUI:initialise()
@@ -270,6 +341,14 @@ function ISPlayerSafehousesUI.OnSafehousesChanged()
     if ISPlayerSafehousesUI.instance then
         ISPlayerSafehousesUI.instance:populateList()
     end
+end
+
+function ISPlayerSafehousesUI:centerMiddle()
+    local x = (getCore():getScreenWidth() - self.width) / 2
+    local y = (getCore():getScreenHeight() - self.height) / 2
+
+    self:setX(x)
+    self:setY(y)
 end
 
 function ISPlayerSafehousesUI:new(player)
@@ -299,6 +378,9 @@ function ISPlayerSafehousesUI:new(player)
 
     o.populateFrequencyMax = 10
     o.populateFrequency = 10
+
+    o.itemTextColor = {r=0.6, g=0.6, b=1, a=1}
+
     ISPlayerSafehousesUI.instance = o
     return o
 end

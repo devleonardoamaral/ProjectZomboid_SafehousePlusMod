@@ -176,17 +176,13 @@ end
 
 function ISUserPanelUI:onJoypadDown(button)
     if button == Joypad.AButton then
-        print("A pressed!")
         local currentFocus = self:getJoypadFocusWidget()
         if not currentFocus then return end
 
         if currentFocus.Type == "ISButton" and currentFocus.enable and currentFocus.onclick then
             currentFocus.onclick(currentFocus.target, currentFocus, 0, 0)
         elseif currentFocus.Type == "ISTickBox" and currentFocus.enable and currentFocus.changeOptionMethod ~= nil then
-            print(currentFocus.changeOptionMethod)
-            print(currentFocus:forceClick())
-            -- currentFocus.selected[1] = not currentFocus.selected[1]
-            -- currentFocus.changeOptionMethod(currentFocus.changeOptionTarget, 1, currentFocus.selected[1], currentFocus.changeOptionArgs[1], currentFocus.changeOptionArgs[2], currentFocus)
+            currentFocus:forceClick()
         end
     elseif button == Joypad.BButton then
         self:close()

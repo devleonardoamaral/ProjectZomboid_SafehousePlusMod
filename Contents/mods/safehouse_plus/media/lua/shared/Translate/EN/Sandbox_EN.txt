@@ -1,23 +1,33 @@
 Sandbox_EN = {
     Sandbox_SafehousePlus = "SafehousePlus",
+    Sandbox_SafehousePlusClientPanel = "SafehousePlus: Client Panel",
     Sandbox_SafehousePlusInterface = "SafehousePlus: Interface",
     Sandbox_SafehousePlusRules = "SafehousePlus: Rules",
 
-    Sandbox_SafehousePlus_MultipleSafehouse = "Multiple Safehouses",
-    Sandbox_SafehousePlus_MultipleSafehouse_tooltip = "Defines whether members can be part of more than one safehouse.",
+    Sandbox_SafehousePlus_MultipleSafehouse = "Allow Multiple Safehouses",
+    Sandbox_SafehousePlus_MultipleSafehouse_tooltip = "Allows players to be members of more than one safehouse simultaneously.",
 
-    Sandbox_SafehousePlus_MemberLimit = "Member Limit",
-    Sandbox_SafehousePlus_MemberLimit_tooltip = "Sets the maximum member limit for each faction. <LINE> If set to zero, the limit is disabled.",
+    Sandbox_SafehousePlus_MemberLimit = "Maximum Member Limit",
+    Sandbox_SafehousePlus_MemberLimit_tooltip = "Sets the maximum number of members allowed in a safehouse. <LINE> A value of '0' disables the limit, allowing an unlimited number of members.",
 
     Sandbox_SafehousePlus_ShowTicketsButton = "Show Tickets Button",
-    Sandbox_SafehousePlus_ShowTicketsButton_tooltip = "Shows or hides the tickets button in the client panel.",
+    Sandbox_SafehousePlus_ShowTicketsButton_tooltip = "Controls the visibility of the tickets button on the client panel. Enable to show or disable to hide.",
 
     Sandbox_SafehousePlus_ShowServerOptionsButton = "Show Server Options Button",
-    Sandbox_SafehousePlus_ShowServerOptionsButton_tooltip = "Shows or hides the server options button in the client panel.",
+    Sandbox_SafehousePlus_ShowServerOptionsButton_tooltip = "Controls the visibility of the server options button on the client panel. Enable to show or disable to hide.",
 
-    Sandbox_SafehousePlus_FloorHighlightOnClaimUIOpen = "Highlight Floor When Claiming",
-    Sandbox_SafehousePlus_FloorHighlightOnClaimUIOpen_tooltip = "Defines whether the claim UI should default to having the floor highlight feature enabled.",
+    Sandbox_SafehousePlus_FloorHighlighOnClaimUIOpen = "Highlight Floor on Claim",
+    Sandbox_SafehousePlus_FloorHighlighOnClaimUIOpen_tooltip = "Enable to automatically highlight the floor when the safehouse claim interface is opened. Disable to start without highlighting.",
 
     Sandbox_SafehousePlus_MaxSafehouseSize = "Maximum Safehouse Size",
-    Sandbox_SafehousePlus_MaxSafehouseSize_tooltip = "Sets the maximum width and height of the safehouse that players can claim. <LINE> WARNING: High values may cause performance drops when opening the claim window!",
+    Sandbox_SafehousePlus_MaxSafehouseSize_tooltip = "Sets the maximum size (width and height) that a safehouse can have when claimed. <LINE> WARNING: Very high values may cause lag when opening the claim interface. Adjust with caution!",
+
+    Sandbox_SafehousePlus_ShowPingOnLogin = "Show Ping on Login",
+    Sandbox_SafehousePlus_ShowPingOnLogin_tooltip = "Enable to show the player's ping in the bottom-right corner of the screen by default when connecting to the server. Disable to hide this information.",
+
+    Sandbox_SafehousePlus_ShowConnectionInfoOnLogin = "Show Connection Information",
+    Sandbox_SafehousePlus_ShowServerInfoOnLogin_tooltip = "Enable to show connection information in the bottom-right corner of the screen by default when connecting to the server. Disable to hide this information.",
+
+    Sandbox_SafehousePlus_ShowServerInfoOnLogin = "Show Server Information",
+    Sandbox_SafehousePlus_ShowServerInfoOnLogin_tooltip = "Enable to show server information in the bottom-right corner of the screen by default when connecting to the server. Disable to hide this information.",
 }

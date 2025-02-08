@@ -257,7 +257,6 @@ function ISSafehouseUI:initialise()
         self.addMemberEntry.isValid = false
         self.addMemberEntry.onTextChange = ISSafehouseUI.onAddMemberEntryBoxTextChange
         self.addMemberEntry.onCommandEntered = ISSafehouseUI.onAddMemberEntryCommand
-        if not isOwner and not isAdmin then self.addMemberEntry:setEditable(false) end
         self:addChild(self.addMemberEntry)
 
         self.addMemberButton = ISButton:new(self.padX + addRemoveButtonsWidth + self.shortPadY, y, addRemoveButtonsWidth, self.buttonHeight, self.addMemberButtonText, self, ISSafehouseUI.onOptionMouseDown)
@@ -635,6 +634,12 @@ function ISSafehouseUI:onAddMemberEntryBoxTextChange()
     self.parent.addMemberButton.enable = canAddMember
 end
 
+function ISSafehouseUI:onAddMemberEntryCommand()
+    if self.isValid then
+        self.parent:addMemberButtonAction()
+    end
+end
+
 function ISSafehouseUI:onSafehouseNameEntryTextChange()
     local newName = self:getInternalText()
 
@@ -759,13 +764,6 @@ function ISSafehouseUI:onSafehouseOwnerEntryCommand()
     end
 end
 
-function ISSafehouseUI:onAddMemberEntryCommand()
-    local newOwner = self:getInternalText():match("^%s*(.-)%s*$")
-    if self.isValid then
-        self.parent:addMemberButtonAction()
-    end
-end
-
 function ISSafehouseUI:onClickRespawn(clickedOption, enabled)
     self.safehouse:setRespawnInSafehouse(enabled, self.player:getUsername())
 end
@@ -852,6 +850,7 @@ function ISSafehouseUI:addMemberButtonAction()
     self:updateMemberLimitLabel()
     self.safehouse:syncSafehouse()
     self.addMemberButton.enable = false
+    self.addMemberEntry.isValid = false
     self.addMemberEntry:setText("")
     self.addMemberEntry:setValid(true)
 end

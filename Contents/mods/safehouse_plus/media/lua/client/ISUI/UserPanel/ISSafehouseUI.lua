@@ -68,8 +68,8 @@ function ISSafehouseUI:initialise()
     self.memberTagName = getText("IGUI_ISSafehouseUI_ItemMemberTag")
 
     self.maxTagWidth = UIUtils.measureTextX(UIFont.Small, #self.ownerTagName > #self.memberTagName and self.ownerTagName or self.memberTagName)
-    self.safehouseNameWidth = UIUtils.measureTextX(UIFont.Small, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-    self.memberNameWidth = UIUtils.measureTextX(UIFont.Small, "XXXXXXXXXXXXXXXXXXXX")
+    self.safehouseNameWidth = UIUtils.measureTextX(UIFont.Small, "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+    self.memberNameWidth = UIUtils.measureTextX(UIFont.Small, "OOOOOOOOOOOOOOOOOOOO")
     self.memberScrollListWidth = (self.padX * 2) + self.memberNameWidth + self.maxTagWidth + self.shortPadX
     self.memberScrollListHeight = 200
 

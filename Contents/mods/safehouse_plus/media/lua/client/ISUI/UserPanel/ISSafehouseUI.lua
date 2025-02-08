@@ -21,7 +21,7 @@ function ISSafehouseUI:initialise()
     local isMember = self:isMember()
     local isAdmin = self:isAdmin()
 
-    local y = 90
+    local y = 70
 
     self.padX = 20
     self.padY = 20
@@ -34,8 +34,8 @@ function ISSafehouseUI:initialise()
         or tostring(SandboxVars.SafehousePlus.MemberLimit)
     )
 
-    self.coordLabelText = getText("IGUI_ISSafehouseUI_CoordLabel")
-    self.areaLabelText = getText("IGUI_ISSafehouseUI_SizeLabel")
+    self.coordLabelText = getText("IGUI_ISSafehouseUI_CoordLabel") .. ":"
+    self.areaLabelText = getText("IGUI_ISSafehouseUI_SizeLabel") .. ":"
     self.areaText = tostring(self.safehouseSize) .. " tiles"
     self.coordNText = "N:" .. tostring(self.x1) .. "," .. tostring(self.y1)
     self.coordSText = "S:" .. tostring(self.x2) .. "," .. tostring(self.y2)
@@ -55,14 +55,23 @@ function ISSafehouseUI:initialise()
     self.addMemberButtonText = getText("IGUI_ISSafehouseUI_AddMemberButton")
     self.removeMemberButtonText = getText("IGUI_ISSafehouseUI_RemoveMemberButton")
 
-    local addRemoveButtonsWidth = UIUtils.measureTextX(
-        UIFont.Small, 
-        #self.addMemberButtonText > #self.removeMemberButtonText 
-        and self.addMemberButtonText or self.removeMemberButtonText
-    )
+    self.memberScrollListLabelText = getText("IGUI_ISSafehouseUI_ScrollListLabel") .. ":"
+    self.addMemberLabelText = getText("IGUI_ISSafehouseUI_AddMemberLabel") .. ":"
+    self.manageSafehouseLabelText = getText("IGUI_ISSafehouseUI_ManageSafehouseLabel")
 
+    self.safehouseNameEntryTooltipDefaultText = getText("Tooltip_SafehousePlus_setNewSafehouseNameEntry_Default")
+    self.safehouseOwnerEntryTooltipDefaultText = getText("Tooltip_SafehousePlus_setNewOwnerEntry_Default")
+    self.addMemberEntryTooltipDefaultText = getText("Tooltip_SafehousePlus_AddMemberEntry_Default")
+    
     self.showSafehouseTickBoxText = getText("IGUI_SafehouseUI_SafehouseLimits")
     self.respawnSafehouseTickBoxText = getText("IGUI_SafehouseUI_Respawn")
+
+    local tickBoxesWidth = UIUtils.measureTextX(
+        UIFont.Small, 
+        #self.showSafehouseTickBoxText > #self.respawnSafehouseTickBoxText 
+        and self.showSafehouseTickBoxText or self.respawnSafehouseTickBoxText
+    ) + 20
+
     self.cancelButtonText = getText("UI_btn_close")
 
     self.ownerTagName = getText("IGUI_ISSafehouseUI_ItemOwnerTag")
@@ -79,7 +88,7 @@ function ISSafehouseUI:initialise()
     self.buttonHeight = math.max(25, FONT_HGT_SMALL + 6)
     self.smallButtonHeight = FONT_HGT_SMALL + 6
 
-    self.tickBoxHeight = 18
+    self.tickBoxHeight = math.max(16, FONT_HGT_SMALL) + 4
     self.labelHeight = FONT_HGT_SMALL + 4
     self.mediumLabelHeight = FONT_HGT_MEDIUM + 6
     self.largeLabelHeight = FONT_HGT_LARGE + 8
@@ -91,7 +100,7 @@ function ISSafehouseUI:initialise()
     self:setWidth(
         math.max(
             self.memberScrollListWidth,
-            (addRemoveButtonsWidth * 2) + self.memberNameWidth + 2 + self.padX,
+            (tickBoxesWidth * 2) + self.shortPadX,
             (isOwner or isAdmin) and ((self.safehouseNameWidth * 2) + 4 + self.shortPadX) or 0
         ) + (2 * self.padX)
     )
@@ -102,8 +111,6 @@ function ISSafehouseUI:initialise()
     
     local totalWidthForEntries = usableWidth - self.shortPadX
     local safehouseEntryWidth = totalWidthForEntries / 2
-
-    local addRemoveButtonsWidth = (usableWidth - self.padX) / 3
 
     local rightSmallButtonsWidth = math.max(
         UIUtils.measureTextX(UIFont.Small, self.releaseSafehouseButtonText),
@@ -124,34 +131,28 @@ function ISSafehouseUI:initialise()
     self:addChild(self.safehouseTitleLabel)
     local y = y + self.largeLabelHeight + self.padY
    
-    self.coordLabel = ISLabel:new(self.padX + ((self.width - (self.padX * 2)) / 4), y, self.labelHeight, self.coordLabelText, 1,1,1,1, UIFont.Small, true)
-    self.coordLabel.center = true
+    self.coordLabel = ISLabel:new(self.padX + ((self.width - (self.padX * 2)) / 4) - 2.5, y, self.labelHeight, self.coordLabelText, 1,1,1,1, UIFont.Small, false)
     self.coordLabel:initialise()
     self.coordLabel:instantiate()
     self:addChild(self.coordLabel)
 
-    self.areaLabel = ISLabel:new(self.padX + (((self.width - (self.padX * 2)) / 4) * 3), y, self.labelHeight, self.areaLabelText, 1,1,1,1, UIFont.Small, true)
-    self.areaLabel.center = true
+    self.areaLabel = ISLabel:new(self.padX + (((self.width - (self.padX * 2)) / 4) * 3) - 2.5, y, self.labelHeight, self.areaLabelText, 1,1,1,1, UIFont.Small, false)
     self.areaLabel:initialise()
     self.areaLabel:instantiate()
     self:addChild(self.areaLabel)
-    y = y + self.labelHeight + self.shortPadY
 
-    self.area = ISLabel:new(self.padX + (((self.width - (self.padX * 2)) / 4) * 3), y, self.labelHeight, self.areaText, 0.6,0.6,1,1, UIFont.Small, true)
-    self.area.center = true
+    self.area = ISLabel:new(self.padX + (((self.width - (self.padX * 2)) / 4) * 3) + 2.5, y, self.labelHeight, self.areaText, 0.6,0.6,1,1, UIFont.Small, true)
     self.area:initialise()
     self.area:instantiate()
     self:addChild(self.area)
 
-    self.coodN = ISLabel:new(self.padX + ((self.width - (self.padX * 2)) / 4), y, self.labelHeight, self.coordNText, 0.6,0.6,1,1, UIFont.Small, true)
-    self.coodN.center = true
+    self.coodN = ISLabel:new(self.padX + ((self.width - (self.padX * 2)) / 4) + 2.5, y, self.labelHeight, self.coordNText, 0.6,0.6,1,1, UIFont.Small, true)
     self.coodN:initialise()
     self.coodN:instantiate()
     self:addChild(self.coodN)
-    y = y + self.labelHeight + self.shortPadY
+    y = y + self.labelHeight
 
-    self.coordS = ISLabel:new(self.padX + ((self.width - (self.padX * 2)) / 4), y, self.labelHeight, self.coordSText, 0.6,0.6,1,1, UIFont.Small, true)
-    self.coordS.center = true
+    self.coordS = ISLabel:new(self.padX + ((self.width - (self.padX * 2)) / 4) + 2.5, y, self.labelHeight, self.coordSText, 0.6,0.6,1,1, UIFont.Small, true)
     self.coordS:initialise()
     self.coordS:instantiate()
     self:addChild(self.coordS)
@@ -197,8 +198,38 @@ function ISSafehouseUI:initialise()
         self.exitSafehouseButton.borderColor = self.buttonBorderColor
         self:addChild(self.exitSafehouseButton)
     end
+
+    self.memberScrollListLabel = ISLabel:new(self.padX, y, self.labelHeight, self.memberScrollListLabelText, 1,1,1,1, UIFont.Small, true)
+    self.memberScrollListLabel:initialise()
+    self.memberScrollListLabel:instantiate()
+    self:addChild(self.memberScrollListLabel)
     
+    self.safehouseMembersLimitLabel = ISLabel:new(self.padX + usableWidth, y, self.labelHeight, self.safehouseMemberLimitLabelText, 1,1,1,1, UIFont.Small, false)
+    self.safehouseMembersLimitLabel:initialise()
+    self.safehouseMembersLimitLabel:instantiate()
+    self:addChild(self.safehouseMembersLimitLabel)
+    y = y + self.labelHeight
+
+    self.memberScrollList = ISScrollingListBox:new(self.padX, y, self.memberScrollListWidth, self.memberScrollListHeight)
+    self.memberScrollList:initialise()
+    self.memberScrollList:instantiate()
+    self.memberScrollList:setFont(UIFont.Small, 4)
+    self.memberScrollList.selected = 0
+    self.memberScrollList.joypadParent = self
+    self.memberScrollList.doDrawItem = ISSafehouseUI.doMemberScrollListDrawItem
+    self.memberScrollList.drawBorder = true
+    self.memberScrollList.onMouseDown = ISSafehouseUI.onMemberScrollListMouseDown
+    self:addChild(self.memberScrollList)
+    y = y + self.memberScrollListHeight + self.padY
+
     if isOwner or isAdmin then
+        self.manageSafehouseLabel = ISLabel:new(self.width / 2, y, self.labelHeight, self.manageSafehouseLabelText, 1,1,1,1, UIFont.Medium, true)
+        self.manageSafehouseLabel.center = true
+        self.manageSafehouseLabel:initialise()
+        self.manageSafehouseLabel:instantiate()
+        self:addChild(self.manageSafehouseLabel)
+        y = y + self.mediumLabelHeight
+
         self.safehouseNameEntryLabel = ISLabel:new(self.padX, y, self.labelHeight, self.safehouseNameEntryLabelText, 1,1,1,1, UIFont.Small, true)
         self.safehouseNameEntryLabel:initialise()
         self.safehouseNameEntryLabel:instantiate()
@@ -229,37 +260,24 @@ function ISSafehouseUI:initialise()
         self.safehouseOwnerEntry.onCommandEntered = ISSafehouseUI.onSafehouseOwnerEntryCommand
         if not isOwner and not isAdmin then self.safehouseOwnerEntry:setEditable(false) end
         self:addChild(self.safehouseOwnerEntry)
-        y = y + self.buttonHeight + self.padY
-    end
-    
-    self.safehouseMembersLimitLabel = ISLabel:new(self.padX + usableWidth, y, self.labelHeight, self.safehouseMemberLimitLabelText, 1,1,1,1, UIFont.Small, false)
-    self.safehouseMembersLimitLabel:initialise()
-    self.safehouseMembersLimitLabel:instantiate()
-    self:addChild(self.safehouseMembersLimitLabel)
-    y = y + self.labelHeight
+        y = y + self.buttonHeight + self.shortPadY
 
-    self.memberScrollList = ISScrollingListBox:new(self.padX, y, self.memberScrollListWidth, self.memberScrollListHeight)
-    self.memberScrollList:initialise()
-    self.memberScrollList:instantiate()
-    self.memberScrollList:setFont(UIFont.Small, 4)
-    self.memberScrollList.selected = 0
-    self.memberScrollList.joypadParent = self
-    self.memberScrollList.doDrawItem = ISSafehouseUI.doMemberScrollListDrawItem
-    self.memberScrollList.drawBorder = true
-    self.memberScrollList.onMouseDown = ISSafehouseUI.onMemberScrollListMouseDown
-    self:addChild(self.memberScrollList)
-    y = y + self.memberScrollListHeight + self.shortPadY
+        self.addMemberEntryLabel = ISLabel:new(self.padX, y, self.labelHeight, self.addMemberLabelText, 1,1,1,1, UIFont.Small, true)
+        self.addMemberEntryLabel:initialise()
+        self.addMemberEntryLabel:instantiate()
+        self:addChild(self.addMemberEntryLabel)
+        y = y + self.labelHeight
 
-    if self:isOwner() or self:isAdmin() then
-        self.addMemberEntry = ISTextEntryBox:new("", self.padX, y, addRemoveButtonsWidth, self.buttonHeight)
+        self.addMemberEntry = ISTextEntryBox:new("", self.padX, y, safehouseEntryWidth, self.buttonHeight)
         self.addMemberEntry:initialise()
         self.addMemberEntry:instantiate()
         self.addMemberEntry.isValid = false
         self.addMemberEntry.onTextChange = ISSafehouseUI.onAddMemberEntryBoxTextChange
         self.addMemberEntry.onCommandEntered = ISSafehouseUI.onAddMemberEntryCommand
+        self.addMemberEntry.tooltip = getText("Tooltip_SafehousePlus_AddMemberEntry_Default")
         self:addChild(self.addMemberEntry)
 
-        self.addMemberButton = ISButton:new(self.padX + addRemoveButtonsWidth + self.shortPadY, y, addRemoveButtonsWidth, self.buttonHeight, self.addMemberButtonText, self, ISSafehouseUI.onOptionMouseDown)
+        self.addMemberButton = ISButton:new(self.padX + safehouseEntryWidth + self.shortPadY, y, safehouseEntryWidth, self.buttonHeight, self.addMemberButtonText, self, ISSafehouseUI.onOptionMouseDown)
         self.addMemberButton:initialise()
         self.addMemberButton:instantiate()
         self.addMemberButton.internal = "ADDMEMBER"
@@ -267,41 +285,24 @@ function ISSafehouseUI:initialise()
         self.addMemberButton.enable = false
         self:addChild(self.addMemberButton)
 
-        self.removeMemberButton = ISButton:new(self.padX + (addRemoveButtonsWidth * 2) + (self.shortPadY * 2), y, addRemoveButtonsWidth, self.buttonHeight, self.removeMemberButtonText, self, ISSafehouseUI.onOptionMouseDown)
+        y = y + self.buttonHeight + (self.shortPadY / 2) 
+
+        self.removeMemberButton = ISButton:new(self.width - safehouseEntryWidth - self.padX, y, safehouseEntryWidth, self.buttonHeight, self.removeMemberButtonText, self, ISSafehouseUI.onOptionMouseDown)
         self.removeMemberButton:initialise()
         self.removeMemberButton:instantiate()
         self.removeMemberButton.internal = "REMOVEMEMBER"
         self.removeMemberButton.backgroundColor = {r=0.3, g=0, b=0, a=0.8}
         self.removeMemberButton.backgroundColorMouseOver = {r=0.6, g=0, b=0, a=0.8}
         self.removeMemberButton.borderColor = self.buttonBorderColor
-
         self:addChild(self.removeMemberButton)
+        y = y + self.buttonHeight + self.padY
+    else
+        y = y + self.tickBoxHeight + self.padY
     end
+    
 
-    y = y + self.buttonHeight + self.padY
 
-    self.showSafehouseLimitsTickBox = ISTickBox:new(self.padX, y, UIUtils.measureTextX(UIFont.Small, self.showSafehouseTickBoxText), 18, "", self, ISSafehouseUI.onClickShowSafehouseLimits);
-    self.showSafehouseLimitsTickBox:initialise()
-    self.showSafehouseLimitsTickBox:instantiate()
-    self.showSafehouseLimitsTickBox.selected[1] = self.highlightLimits
-    self.showSafehouseLimitsTickBox:addOption(self.showSafehouseTickBoxText)
-    self:addChild(self.showSafehouseLimitsTickBox)
-
-    y = y + 18 + self.shortPadY
-
-    self.reapwnSafehouseTickBox = ISTickBox:new(self.padX, y, UIUtils.measureTextX(UIFont.Small, self.respawnSafehouseTickBoxText), 18, "", self, ISSafehouseUI.onClickRespawn)
-    self.reapwnSafehouseTickBox:initialise()
-    self.reapwnSafehouseTickBox:instantiate()
-    self.reapwnSafehouseTickBox.selected[1] = self.safehouse:isRespawnInSafehouse(self.player:getUsername())
-    self.reapwnSafehouseTickBox:addOption(self.respawnSafehouseTickBoxText)
-    self:addChild(self.reapwnSafehouseTickBox)
-    self.reapwnSafehouseTickBox.enable = false
-
-    if getServerOptions():getBoolean("SafehouseAllowRespawn") and self:isMemberOrOwner() then
-        self.reapwnSafehouseTickBox.enable = true
-    end
-
-    self.cancelButton = ISButton:new(self.width - addRemoveButtonsWidth - self.padX, y, addRemoveButtonsWidth, self.buttonHeight, self.cancelButtonText, self, ISSafehouseUI.onOptionMouseDown)
+    self.cancelButton = ISButton:new(self.width - safehouseEntryWidth - self.padX, y, safehouseEntryWidth, self.buttonHeight, self.cancelButtonText, self, ISSafehouseUI.onOptionMouseDown)
     self.cancelButton:initialise()
     self.cancelButton:instantiate()
     self.cancelButton.internal = "CANCEL"
@@ -309,9 +310,30 @@ function ISSafehouseUI:initialise()
     self.cancelButton.backgroundColorMouseOver = {r=0.6, g=0, b=0, a=0.8}
     self.cancelButton.borderColor = self.buttonBorderColor
     self:addChild(self.cancelButton)
-    y = y + self.buttonHeight + 20
 
+    y = y + self.buttonHeight + self.padY
+    
     self:setHeight(y)
+
+    y = y - self.tickBoxHeight - self.padY
+    
+    self.respawnSafehouseTickBox = ISTickBox:new(self.padX, y, UIUtils.measureTextX(UIFont.Small, self.respawnSafehouseTickBoxText), 18, "", self, ISSafehouseUI.onClickRespawn)
+    self.respawnSafehouseTickBox:initialise()
+    self.respawnSafehouseTickBox:instantiate()
+    self.respawnSafehouseTickBox.selected[1] = self.safehouse:isRespawnInSafehouse(self.player:getUsername())
+    self.respawnSafehouseTickBox:addOption(self.respawnSafehouseTickBoxText)
+    self:addChild(self.respawnSafehouseTickBox)
+    self.respawnSafehouseTickBox.enable = false
+
+    y = y - self.tickBoxHeight - self.shortPadY
+    
+    self.showSafehouseLimitsTickBox = ISTickBox:new(self.padX, y, UIUtils.measureTextX(UIFont.Small, self.showSafehouseTickBoxText), 18, "", self, ISSafehouseUI.onClickShowSafehouseLimits);
+    self.showSafehouseLimitsTickBox:initialise()
+    self.showSafehouseLimitsTickBox:instantiate()
+    self.showSafehouseLimitsTickBox.selected[1] = self.highlightLimits
+    self.showSafehouseLimitsTickBox:addOption(self.showSafehouseTickBoxText)
+    self:addChild(self.showSafehouseLimitsTickBox)
+
 
     self:updateScrollableMemberList()
     self:updateButtons()
@@ -330,7 +352,7 @@ function ISSafehouseUI:initialise()
 end
 
 function ISSafehouseUI:isAdmin()
-    return self.player:isAccessLevel("admin")
+    return not self.player:isAccessLevel("admin")
 end
 
 function ISSafehouseUI:isOwner(playerName)
@@ -448,6 +470,12 @@ function ISSafehouseUI:updateButtons()
     local isAdmin = self:isAdmin()
 
     self:updateRemoveMemberButton()
+
+    if getServerOptions():getBoolean("SafehouseAllowRespawn") and self:isMemberOrOwner() then
+        self.respawnSafehouseTickBox.enable = true
+    else
+        self.respawnSafehouseTickBox.enable = false
+    end
 
     if isOwner or isAdmin then
         if self.releaseSafehouseButton then
@@ -624,6 +652,7 @@ function ISSafehouseUI:onAddMemberEntryBoxTextChange()
     elseif not isMultipleSafehouse and isMemberOfASafehouse then
         tooltip = getText("Tooltip_SafehousePlus_AddMemberEntry_AlreadyInASafehouse", newMember)
     else
+        tooltip = self.addMemberEntryTooltipDefaultText
         canAddMember = true
         setValidColor = true
     end
@@ -771,16 +800,23 @@ end
 function ISSafehouseUI:prerender()
     ISPanel.prerender(self)
 
-    if self.safehouseNameEntry and not self.safehouseNameEntry:isFocused() then
-        self.safehouseNameEntry:setText(self.safehouse:getTitle())
+    if self.safehouseNameEntry then 
+        if not self.safehouseNameEntry:isFocused() then
+            self.safehouseNameEntry:setText(self.safehouse:getTitle())
+            self.safehouseNameEntry.tooltip = self.safehouseNameEntryTooltipDefaultText
+        else
+            self.safehouseNameEntry.tooltip = nil
+        end
     end
 
     if self.safehouseOwnerEntry and not self.safehouseOwnerEntry:isFocused() then
         self.safehouseOwnerEntry:setText(self.safehouse:getOwner())
+        self.safehouseOwnerEntry.tooltip = self.safehouseOwnerEntryTooltipDefaultText
     end
 
     if self.addMemberEntry and not self.addMemberEntry:isFocused() then
         self.addMemberEntry:setText("")
+        self.addMemberEntry.tooltip = self.addMemberEntryTooltipDefaultText
     end
 end
 

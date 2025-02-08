@@ -14,10 +14,14 @@ IGUI_PTBR = {
 
    IGUI_ISSafehouseUI_Title = "SAFEHOUSE",
 
+   IGUI_ISSafehouseUI_ScrollListLabel = "Lista de Membros",
+   IGUI_ISSafehouseUI_AddMemberLabel = "Adicionar Membro",
+   IGUI_ISSafehouseUI_ManageSafehouseLabel = "GERENCIAR SAFEHOUSE",
+
    IGUI_ISSafehouseUI_CoordLabel = "Coordenadas",
    IGUI_ISSafehouseUI_SizeLabel = "Tamanho",
-   IGUI_ISSafehouseUI_NameLabel = "Nome da Safehouse",
-   IGUI_ISSafehouseUI_OwnerLabel = "Proprietário",
+   IGUI_ISSafehouseUI_NameLabel = "Alterar Nome",
+   IGUI_ISSafehouseUI_OwnerLabel = "Alterar Proprietário",
    IGUI_ISSafehouseUI_SafehouseMembersLabel = "Membros",
    IGUI_ISSafehouseUI_SafehouseMembersUnlimitedLabel = "Ilimitado",
 

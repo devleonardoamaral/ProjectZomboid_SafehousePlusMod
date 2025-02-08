@@ -14,10 +14,14 @@ IGUI_EN = {
 
    IGUI_ISSafehouseUI_Title = "SAFEHOUSE",
 
+   IGUI_ISSafehouseUI_ScrollListLabel = "Member List",
+   IGUI_ISSafehouseUI_AddMemberLabel = "Add Member",
+   IGUI_ISSafehouseUI_ManageSafehouseLabel = "MANAGE SAFEHOUSE",
+
    IGUI_ISSafehouseUI_CoordLabel = "Coordinates",
    IGUI_ISSafehouseUI_SizeLabel = "Size",
-   IGUI_ISSafehouseUI_NameLabel = "Safehouse Name",
-   IGUI_ISSafehouseUI_OwnerLabel = "Owner",
+   IGUI_ISSafehouseUI_NameLabel = "Change Name",
+   IGUI_ISSafehouseUI_OwnerLabel = "Change Owner",
    IGUI_ISSafehouseUI_SafehouseMembersLabel = "Members",
    IGUI_ISSafehouseUI_SafehouseMembersUnlimitedLabel = "Unlimited",
 

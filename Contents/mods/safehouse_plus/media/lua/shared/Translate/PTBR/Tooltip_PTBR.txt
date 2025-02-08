@@ -5,10 +5,14 @@ Tooltip_PTBR = {
     Tooltip_SafehousePlus_AddMemberEntry_WrongEntry = "Este não é um nome de usuário válido.",
     Tooltip_SafehousePlus_AddMemberEntry_AlreadyIsMember = "%1 já é membro desta safehouse.",
     Tooltip_SafehousePlus_AddMemberEntry_ReachedLimit = "A Safehouse atingiu o limite de membros.",
+    Tooltip_SafehousePlus_AddMemberEntry_Default = "Digite um nome de usuário e pressione ENTER ou clique no botão ADICIONAR MEMBRO para incluí-lo à sua safehouse.",
 
     Tooltip_SafehousePlus_setNewOwnerEntry_isMember = "%1 não é membro desta safehouse.",
     Tooltip_SafehousePlus_setNewOwnerEntry_isOnline = "É obrigatório %1 estar online para <LINE> transferir a propriedade.",
     Tooltip_SafehousePlus_setNewOwnerEntry_isOwner = "%1 já é proprietário de outra safehouse.",
+    Tooltip_SafehousePlus_setNewOwnerEntry_Default = "Digite o nome de usuário qual você deseja transferir a propriedade e pressione ENTER para confirmar.",
+
+    Tooltip_SafehousePlus_setNewSafehouseNameEntry_Default = "Digite um nome para a safehouse e pressione ENTER para confirmar.",
 
     Tooltip_SafehousePlus_ContextMenu_WarningName = "Não é mais por aqui!",
     Tooltip_SafehousePlus_ContextMenu_Warning = "Devido ao novo sistema de reivindicação de safehouses, não é mais possível utilizar o menu de contexto. <LINE> <LINE> Vá em 'Cliente > Safehouses > Reivindicar Safehouse' para reivindicar uma safehouse.",

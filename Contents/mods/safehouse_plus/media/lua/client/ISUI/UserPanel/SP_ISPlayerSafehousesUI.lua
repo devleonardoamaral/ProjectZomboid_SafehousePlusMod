@@ -38,9 +38,9 @@ function ISPlayerSafehousesUI:initialise()
     self.safehousesListBoxItemOwnerLabelWidth = UIUtils.measureTextX(UIFont.Small, self.safehousesListBoxItemOwnerLabel)
     self.safehousesListBoxItemCoordLabelWidth = UIUtils.measureTextX(UIFont.Small, self.safehousesListBoxItemCoordLabel)
 
-    self.safehousesListBoxItemNameTextWidth = UIUtils.measureTextX(UIFont.Small, "XXXXXXXXXXXXXXXXXXXX")
-    self.safehousesListBoxItemOwnerTextWidth = UIUtils.measureTextX(UIFont.Small, "XXXXXXXXXXXXXXXXXXXX")
-    self.safehousesListBoxItemCoordTextWidth = UIUtils.measureTextX(UIFont.Small, "XXXXX,XXXXX x XXXXX,XXXXX")
+    self.safehousesListBoxItemNameTextWidth = UIUtils.measureTextX(UIFont.Small, "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+    self.safehousesListBoxItemOwnerTextWidth = UIUtils.measureTextX(UIFont.Small, "OOOOOOOOOOOOOOOOOOOO")
+    self.safehousesListBoxItemCoordTextWidth = UIUtils.measureTextX(UIFont.Small, "OOOOO,OOOOO x OOOOO,OOOOO")
 
     self.buttonWidth = math.max(
         UIUtils.measureTextX(UIFont.Small, self.claimButtonText),

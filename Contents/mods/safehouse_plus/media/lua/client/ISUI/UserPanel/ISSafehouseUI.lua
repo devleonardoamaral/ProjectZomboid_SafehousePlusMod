@@ -331,7 +331,7 @@ function ISSafehouseUI:initialise()
 end
 
 function ISSafehouseUI:isAdmin()
-    return not self.player:isAccessLevel("admin")
+    return self.player:isAccessLevel("admin")
 end
 
 function ISSafehouseUI:isOwner(playerName)

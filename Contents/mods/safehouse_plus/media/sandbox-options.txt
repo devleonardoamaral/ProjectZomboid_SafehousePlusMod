@@ -4,7 +4,7 @@ option SafehousePlus.ShowTicketsButton
 {
     type = boolean,
     default = true,
-    page = SafehousePlus,
+    page = SafehousePlusClientPanel,
     translation = SafehousePlus_ShowTicketsButton,
 }
 
@@ -12,15 +12,47 @@ option SafehousePlus.ShowServerOptionsButton
 {
     type = boolean,
     default = true,
-    page = SafehousePlus,
+    page = SafehousePlusClientPanel,
     translation = SafehousePlus_ShowServerOptionsButton,
+}
+
+option SafehousePlus.ShowPingOnLogin
+{
+    type = boolean,
+    default = true,
+    page = SafehousePlusClientPanel,
+    translation = SafehousePlus_ShowPingOnLogin,
+}
+
+option SafehousePlus.ShowConnectionInfoOnLogin
+{
+    type = boolean,
+    default = true,
+    page = SafehousePlusClientPanel,
+    translation = SafehousePlus_ShowConnectionInfoOnLogin,
+}
+
+option SafehousePlus.ShowServerInfoOnLogin
+{
+    type = boolean,
+    default = false,
+    page = SafehousePlusClientPanel,
+    translation = SafehousePlus_ShowServerInfoOnLogin,
+}
+
+option SafehousePlus.FloorHighlighOnClaimUIOpen
+{
+    type = boolean,
+    default = true,
+    page = SafehousePlusInterface,
+    translation = SafehousePlus_FloorHighlighOnClaimUIOpen,
 }
 
 option SafehousePlus.MultipleSafehouse
 {
     type = boolean,
     default = true,
-    page = SafehousePlus,
+    page = SafehousePlusRules,
     translation = SafehousePlus_MultipleSafehouse,
 }
 
@@ -30,16 +62,8 @@ option SafehousePlus.MemberLimit
     min = 0,
     default = 0,
     max = 999,
-    page = SafehousePlus,
+    page = SafehousePlusRules,
     translation = SafehousePlus_MemberLimit,
-}
-
-option SafehousePlus.FloorHighlighOnClaimUIOpen
-{
-    type = boolean,
-    default = true,
-    page = SafehousePlus,
-    translation = SafehousePlus_FloorHighlighOnClaimUIOpen,
 }
 
 option SafehousePlus.MaxSafehouseSize
@@ -48,6 +72,6 @@ option SafehousePlus.MaxSafehouseSize
     min = 5,
     default = 40,
     max = 300,
-    page = SafehousePlus,
+    page = SafehousePlusRules,
     translation = SafehousePlus_MaxSafehouseSize,
 }

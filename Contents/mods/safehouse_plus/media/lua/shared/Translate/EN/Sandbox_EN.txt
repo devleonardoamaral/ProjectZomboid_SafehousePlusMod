@@ -1,5 +1,7 @@
 Sandbox_EN = {
     Sandbox_SafehousePlus = "SafehousePlus",
+    Sandbox_SafehousePlusInterface = "SafehousePlus: Interface",
+    Sandbox_SafehousePlusRules = "SafehousePlus: Rules",
 
     Sandbox_SafehousePlus_MultipleSafehouse = "Multiple Safehouses",
     Sandbox_SafehousePlus_MultipleSafehouse_tooltip = "Defines whether members can be part of more than one safehouse.",
@@ -7,10 +9,10 @@ Sandbox_EN = {
     Sandbox_SafehousePlus_MemberLimit = "Member Limit",
     Sandbox_SafehousePlus_MemberLimit_tooltip = "Sets the maximum member limit for each faction. <LINE> If set to zero, the limit is disabled.",
 
-    Sandbox_SafehousePlus_ShowTicketsButton = "Show Tickets",
+    Sandbox_SafehousePlus_ShowTicketsButton = "Show Tickets Button",
     Sandbox_SafehousePlus_ShowTicketsButton_tooltip = "Shows or hides the tickets button in the client panel.",
 
-    Sandbox_SafehousePlus_ShowServerOptionsButton = "Show Server Options",
+    Sandbox_SafehousePlus_ShowServerOptionsButton = "Show Server Options Button",
     Sandbox_SafehousePlus_ShowServerOptionsButton_tooltip = "Shows or hides the server options button in the client panel.",
 
     Sandbox_SafehousePlus_FloorHighlightOnClaimUIOpen = "Highlight Floor When Claiming",

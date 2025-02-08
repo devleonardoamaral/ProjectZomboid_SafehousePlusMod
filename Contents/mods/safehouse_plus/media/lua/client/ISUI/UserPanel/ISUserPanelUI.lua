@@ -371,9 +371,9 @@ function ISUserPanelUI:new(x, y, width, height, player)
 end
 
 local function OnGameStart()
-    setShowConnectionInfo(true)
-    setShowServerInfo(false)
-    setShowPingInfo(true)
+    setShowConnectionInfo(SandboxVars.SafehousePlus.ShowConnectionInfoOnLogin)
+    setShowServerInfo(SandboxVars.SafehousePlus.ShowServerInfoOnLogin)
+    setShowPingInfo(SandboxVars.SafehousePlus.ShowPingOnLogin)
 end
 
 Events.OnGameStart.Add(OnGameStart)

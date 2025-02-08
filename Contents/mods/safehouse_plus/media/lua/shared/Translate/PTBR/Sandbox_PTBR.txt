@@ -1,21 +1,35 @@
 Sandbox_PTBR = {
     Sandbox_SafehousePlus = "SafehousePlus",
+    Sandbox_SafehousePlusClientPanel= "SafehousePlus: Painel Client",
+    Sandbox_SafehousePlusInterface = "SafehousePlus: Interface",
+    Sandbox_SafehousePlusRules = "SafehousePlus: Regras",
 
-    Sandbox_SafehousePlus_MultipleSafehouse = "Multiplas Safehouses",
-    Sandbox_SafehousePlus_MultipleSafehouse_tooltip = "Define se os membros podem estar em mais de uma safehouse.",
-    
-    Sandbox_SafehousePlus_MemberLimit = "Limite de Membros",
-    Sandbox_SafehousePlus_MemberLimit_tooltip = "Define o limite de membros máximo de cada facção. <LINE> Se definido como zero o limite é desabilitado.",
+    Sandbox_SafehousePlus_MultipleSafehouse = "Permitir Múltiplas Safehouses",
+    Sandbox_SafehousePlus_MultipleSafehouse_tooltip = "Permite que os jogadores sejam membros de mais de uma safehouse simultaneamente.",
 
-    Sandbox_SafehousePlus_ShowTicketsButton = "Mostrar Tickets",
-    Sandbox_SafehousePlus_ShowTicketsButton_tooltip = "Mostra ou oculta o botão de tickets no painel do cliente.",
+    Sandbox_SafehousePlus_MemberLimit = "Limite Máximo de Membros",
+    Sandbox_SafehousePlus_MemberLimit_tooltip = "Define o número máximo de membros permitidos em uma safehouse. <LINE> Valor '0' desativa o limite, permitindo número ilimitado de membros.",
 
-    Sandbox_SafehousePlus_ShowServerOptionsButton = "Mostrar Opções do Servidor",
-    Sandbox_SafehousePlus_ShowServerOptionsButton_tooltip = "Mostra ou oculta o botão de opções do servidor no painel do cliente.",
+    Sandbox_SafehousePlus_ShowTicketsButton = "Exibir Botão de Tickets",
+    Sandbox_SafehousePlus_ShowTicketsButton_tooltip = "Controla a visibilidade do botão de tickets no painel do cliente. Ative para exibir ou desative para ocultar.",
+
+    Sandbox_SafehousePlus_ShowServerOptionsButton = "Exibir Botão de Opções do Servidor",
+    Sandbox_SafehousePlus_ShowServerOptionsButton_tooltip = "Controla a visibilidade do botão de opções do servidor no painel do cliente. Ative para exibir ou desative para ocultar.",
 
     Sandbox_SafehousePlus_FloorHighlighOnClaimUIOpen = "Destacar Piso ao Reivindicar",
-    Sandbox_SafehousePlus_FloorHighlighOnClaimUIOpen_tooltip = "Define se por padrão a UI de reivindicação deve iniciar com o recurso de destacar o piso ligado.",
+    Sandbox_SafehousePlus_FloorHighlighOnClaimUIOpen_tooltip = "Ative para destacar automaticamente o piso ao abrir a interface de reivindicação de safehouse. Desative para iniciar sem o destaque.",
 
-    Sandbox_SafehousePlus_MaxSafehouseSize = "Tamanho Máximo Safehouse",
-    Sandbox_SafehousePlus_MaxSafehouseSize_tooltip = "Define a largura e altura máxima da safehouse que os jogadores poderão reivindicar. <LINE> CUIDADO: valores altos podem causar queda de desempenho ao abrir a janela de claim!",
+    Sandbox_SafehousePlus_MaxSafehouseSize = "Tamanho Máximo da Safehouse",
+    Sandbox_SafehousePlus_MaxSafehouseSize_tooltip = "Define o tamanho máximo (largura e altura) que uma safehouse pode ter ao ser reivindicada. <LINE> AVISO: Valores muito altos podem causar lentidão ao abrir a interface de reivindicação. Ajuste com cuidado!",
+
+    Sandbox_SafehousePlus_ShowPingOnLogin = "Exibir Ping ao Conectar",
+    Sandbox_SafehousePlus_ShowPingOnLogin_tooltip = "Ative para exibir o ping do jogador no canto inferior direito da tela por padrão ao se conectar ao servidor. Desative para ocultar essa informação.",
+
+    Sandbox_SafehousePlus_ShowConnectionInfoOnLogin = "Exibir Informações de Conexão",
+    Sandbox_SafehousePlus_ShowServerInfoOnLogin_tooltip = "Ative para exibir as informações de conexão no canto inferior direito da tela por padrão ao se conectar ao servidor. Desative para ocultar essa informação.",
+
+    Sandbox_SafehousePlus_ShowServerInfoOnLogin = "Exibir Informações do Servidor",
+    Sandbox_SafehousePlus_ShowServerInfoOnLogin_tooltip = "Ative para exibir as informações do servidor no canto inferior direito da tela por padrão ao se conectar ao servidor. Desative para ocultar essa informação.",
+
+
 }

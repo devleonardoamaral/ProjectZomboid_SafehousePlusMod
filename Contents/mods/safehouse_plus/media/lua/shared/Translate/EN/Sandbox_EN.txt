@@ -30,4 +30,13 @@ Sandbox_EN = {
 
     Sandbox_SafehousePlus_ShowServerInfoOnLogin = "Show Server Information",
     Sandbox_SafehousePlus_ShowServerInfoOnLogin_tooltip = "Enable to show server information in the bottom-right corner of the screen by default when connecting to the server. Disable to hide this information.",
+
+    Sandbox_SafehousePlus_OwnerLimit = "Ownership Limit",
+    Sandbox_SafehousePlus_OwnerLimit_tooltip = "Defines the maximum number of safehouses a player can own.",
+
+    Sandbox_SafehousePlus_SpecialPlayersOwnerLimit = "VIP Ownership Limit",
+    Sandbox_SafehousePlus_SpecialPlayersOwnerLimit_tooltip = "Defines the maximum number of safehouses a VIP player can own.",
+
+    Sandbox_SafehousePlus_SpecialPlayersList = "VIP Players",
+    Sandbox_SafehousePlus_SpecialPlayersList_tooltip = "Add the usernames of VIP players separated by ';'. VIP players in the list have special rules for claiming a safehouse.",
 }

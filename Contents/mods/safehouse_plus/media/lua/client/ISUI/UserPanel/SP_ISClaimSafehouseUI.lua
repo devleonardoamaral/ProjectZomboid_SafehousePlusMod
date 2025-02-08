@@ -13,6 +13,14 @@ local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 function ISClaimSafehouseUI:initialise()
     ISPanel.initialise(self)
 
+    self.vipPlayers = SPUtils.splitStringIntoLookupTable(SandboxVars.SafehousePlus.SpecialPlayersList, ";")
+    self.isVip = self.vipPlayers[self.username]
+    self.ownerLimit = (
+        self.isVip
+        and SandboxVars.SafehousePlus.SpecialPlayersOwnerLimit 
+        or SandboxVars.SafehousePlus.OwnerLimit
+    )
+
     local y = 70
 
     self.padX = 20
@@ -40,7 +48,7 @@ function ISClaimSafehouseUI:initialise()
     self.statusTextResidential = getText("IGUI_ISClaimSafehousesUI_ResidentialStatus")
     self.statusTextEmpty = getText("IGUI_ISClaimSafehousesUI_EmptyStatus")
     self.statusTextSpawn = getText("IGUI_ISClaimSafehousesUI_SpawnStatus")
-    self.statusTextIsOwner = getText("IGUI_ISClaimSafehousesUI_isOwnerStatus")
+    self.statusTextIsReachedLimit = getText("IGUI_ISClaimSafehousesUI_isReachedLimit")
 
     self.maxStatusTextWidth = math.max(
         UIUtils.measureTextX(UIFont.Medium, self.statusTextFail),
@@ -51,7 +59,7 @@ function ISClaimSafehouseUI:initialise()
         UIUtils.measureTextX(UIFont.Medium, self.statusTextResidential),
         UIUtils.measureTextX(UIFont.Medium, self.statusTextEmpty),
         UIUtils.measureTextX(UIFont.Medium, self.statusTextSpawn),
-        UIUtils.measureTextX(UIFont.Medium, self.statusTextIsOwner)
+        UIUtils.measureTextX(UIFont.Medium, self.statusTextIsReachedLimit)
     )
 
     self.buttonHeight = math.max(25, FONT_HGT_SMALL + 6)
@@ -138,6 +146,22 @@ function ISClaimSafehouseUI:initialise()
     Events.OnTick.Add(self.drawMethod)
 end
 
+function ISClaimSafehouseUI:getPlayerOwnedSafehouseCount(playerName)
+    playerName = playerName ~= nil and playerName or self.player:getUsername()
+    local safehouses = SafeHouse.getSafehouseList()
+    local numOfSafehouses = 0
+
+    for i = 0, safehouses:size() - 1 do
+        local safehouse = safehouses:get(i)
+
+        if safehouse:getOwner() == playerName then
+            numOfSafehouses = numOfSafehouses + 1
+        end
+    end
+
+    return numOfSafehouses
+end
+
 function ISClaimSafehouseUI:render()
     self:drawTextCentre(
         self.titleText,
@@ -152,9 +176,10 @@ function ISClaimSafehouseUI:onClickShowHighlight(clickedOption, enabled)
     self.showHighlighted = enabled
 end
 
-function ISClaimSafehouseUI:onOptionMouseDown(button, x, y)
+function ISClaimSafehouseUI:onOptionMouseDown(button)
     if button.internal == "CLAIM" then
-        if self:isMemberOrOwner() then
+        self:updateData()
+        if not self.canClaim then
             self.claimButton.enable = false
             return
         end
@@ -202,9 +227,9 @@ function ISClaimSafehouseUI:updateCanClaim()
 
     local allowNonResidential = getServerOptions():getOption("SafehouseAllowNonResidential") == "true" and true or false
 
-    if self.isOwner then
+    if self.isReachedLimit then
         canClaim = false
-        status = self.statusTextIsOwner
+        status = self.statusTextIsReachedLimit
     elseif self.isMember then
         canClaim = false
         status = self.statusTextIsMember
@@ -234,61 +259,40 @@ function ISClaimSafehouseUI:updateCanClaim()
     self:updateStatusLabel(status, self.highlightColor)
 end
 
-function ISClaimSafehouseUI:isMemberOrOwner()
-    self.isMember = false
-    self.isOwner = false
+function ISClaimSafehouseUI:isSafehouseMember()
+    local isMember = false
+    local safehouses = SafeHouse.getSafehouseList()
 
-    if not self.isAdmin then
-        local safehouses = SafeHouse.getSafehouseList()
-        local playerName = self.player:getUsername()
+    for i = 0, safehouses:size() - 1 do
+        local safehouse = safehouses:get(i)
+        local players = safehouse:getPlayers()
 
-        for i = 0, safehouses:size() - 1 do
-            local safehouse = safehouses:get(i)
-
-            if safehouse:getOwner() == playerName then
-                self.isOwner = true
-                self:updateCanClaim()
-                return
-            end
-
-            if not SandboxVars.SafehousePlus.MultipleSafehouse then
-                local players = safehouse:getPlayers()
-                if players and players:contains(playerName) then
-                    self.isMember = true
-                    self:updateCanClaim()
-                    return
-                end
-            end
+        if players and players:contains(self.username) then
+            isMember = true
         end
     end
 
-    return (self.isMember or self.isOwner) and true or false
+    return isMember
 end
 
 function ISClaimSafehouseUI:updateData()
     self.isMember = false
-    self.isOwner = false
+    self.isReachedLimit = false
 
     if not self.isAdmin then
-        local safehouses = SafeHouse.getSafehouseList()
-        local playerName = self.player:getUsername()
+        local playerOwnedSafehouseCount = self:getPlayerOwnedSafehouseCount()
 
-        for i = 0, safehouses:size() - 1 do
-            local safehouse = safehouses:get(i)
+        if playerOwnedSafehouseCount >= self.ownerLimit then
+            self.isReachedLimit = true
+            self:updateCanClaim()
+            return
+        end
 
-            if safehouse:getOwner() == playerName then
-                self.isOwner = true
+        if not SandboxVars.SafehousePlus.MultipleSafehouse then
+            if self:isSafehouseMember() then
+                self.isMember = true
                 self:updateCanClaim()
                 return
-            end
-
-            if not SandboxVars.SafehousePlus.MultipleSafehouse then
-                local players = safehouse:getPlayers()
-                if players and players:contains(playerName) then
-                    self.isMember = true
-                    self:updateCanClaim()
-                    return
-                end
             end
         end
     end
@@ -479,6 +483,7 @@ function ISClaimSafehouseUI:new(player)
     self.__index = self
 
     o.player = player
+    o.username = player:getUsername()
     o.isAdmin = o.player:isAccessLevel("admin")
 
     o.gridSquare = nil
@@ -510,11 +515,11 @@ function ISClaimSafehouseUI:new(player)
     o.isSpawn = false
     o.occupied = false
     o.isMember = false
-    o.isOwner = false
+    o.isReachedLimit = false
 
     o.showHighlighted = SandboxVars.SafehousePlus.FloorHighlighOnClaimUIOpen
 
-    o.updateSpeed = 100
+    o.updateSpeed = 50
     o.updateCounter = o.updateSpeed
 
     o.moveWithMouse = true

@@ -13,4 +13,18 @@ function Utils.unmergeInt(mergedInt, intMask)
     return int1, int2
 end
 
+function Utils.splitStringIntoLookupTable(text, separator)
+    local result = {}
+        
+    for item in string.gmatch(text, "[^%" .. separator .. "]+") do
+        item = string.gsub(item, "^%s*(.-)%s*$", "%1")
+        
+        if item ~= "" then
+            result[item] = true
+        end
+    end
+    
+    return result
+end
+
 return Utils

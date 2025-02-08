@@ -9,7 +9,7 @@ Tooltip_PTBR = {
 
     Tooltip_SafehousePlus_setNewOwnerEntry_isMember = "%1 não é membro desta safehouse.",
     Tooltip_SafehousePlus_setNewOwnerEntry_isOnline = "É obrigatório %1 estar online para <LINE> transferir a propriedade.",
-    Tooltip_SafehousePlus_setNewOwnerEntry_isOwner = "%1 já é proprietário de outra safehouse.",
+    Tooltip_SafehousePlus_setNewOwnerEntry_isReachedOwnedLimit = "%1 já atingiu o limite de safehouses.",
     Tooltip_SafehousePlus_setNewOwnerEntry_Default = "Digite o nome de usuário qual você deseja transferir a propriedade e pressione ENTER para confirmar.",
 
     Tooltip_SafehousePlus_setNewSafehouseNameEntry_Default = "Digite um nome para a safehouse e pressione ENTER para confirmar.",

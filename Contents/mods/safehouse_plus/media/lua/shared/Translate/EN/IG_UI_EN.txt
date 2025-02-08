@@ -51,5 +51,5 @@ IGUI_EN = {
    IGUI_ISClaimSafehousesUI_SpawnStatus = "This is a spawn location",
    IGUI_ISClaimSafehousesUI_isTooBigStatus = "This location is too big",
    IGUI_ISClaimSafehousesUI_isMemberStatus = "You are already a member of a safehouse",
-   IGUI_ISClaimSafehousesUI_isOwnerStatus = "You are already the owner of a safehouse",
+   IGUI_ISClaimSafehousesUI_isReachedLimit = "You have reached the maximum safehouse ownership limit",
 }

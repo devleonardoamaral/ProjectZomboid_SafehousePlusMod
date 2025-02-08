@@ -66,6 +66,34 @@ option SafehousePlus.MemberLimit
     translation = SafehousePlus_MemberLimit,
 }
 
+option SafehousePlus.OwnerLimit
+{
+    type = integer,
+    min = 1,
+    default = 1,
+    max = 999,
+    page = SafehousePlusRules,
+    translation = SafehousePlus_OwnerLimit,
+}
+
+option SafehousePlus.SpecialPlayersOwnerLimit
+{
+    type = integer,
+    min = 1,
+    default = 1,
+    max = 999,
+    page = SafehousePlusRules,
+    translation = SafehousePlus_SpecialPlayersOwnerLimit,
+}
+
+option SafehousePlus.SpecialPlayersList
+{
+    type = string,
+    default = ,
+    page = SafehousePlusRules,
+    translation = SafehousePlus_SpecialPlayersList,
+}
+
 option SafehousePlus.MaxSafehouseSize
 {
     type = integer,

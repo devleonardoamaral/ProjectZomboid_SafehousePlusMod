@@ -9,7 +9,7 @@ Tooltip_EN = {
 
     Tooltip_SafehousePlus_setNewOwnerEntry_isMember = "%1 is not a member of this safehouse.",
     Tooltip_SafehousePlus_setNewOwnerEntry_isOnline = "%1 must be online to <LINE> transfer ownership.",
-    Tooltip_SafehousePlus_setNewOwnerEntry_isOwner = "%1 is already the owner of another safehouse.",
+    Tooltip_SafehousePlus_setNewOwnerEntry_isReachedOwnedLimit = "%1 has reached the safehouse limit.",
     Tooltip_SafehousePlus_setNewOwnerEntry_Default = "Type the username of the player you want to transfer ownership to and press ENTER to confirm."
 
     Tooltip_SafehousePlus_setNewSafehouseNameEntry_Default = "Type a name for the safehouse and press ENTER to confirm."

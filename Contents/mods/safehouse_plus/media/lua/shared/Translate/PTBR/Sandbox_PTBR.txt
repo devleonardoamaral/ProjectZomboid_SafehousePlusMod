@@ -7,7 +7,7 @@ Sandbox_PTBR = {
     Sandbox_SafehousePlus_MultipleSafehouse = "Permitir Múltiplas Safehouses",
     Sandbox_SafehousePlus_MultipleSafehouse_tooltip = "Permite que os jogadores sejam membros de mais de uma safehouse simultaneamente.",
 
-    Sandbox_SafehousePlus_MemberLimit = "Limite Máximo de Membros",
+    Sandbox_SafehousePlus_MemberLimit = "Limite de Membros",
     Sandbox_SafehousePlus_MemberLimit_tooltip = "Define o número máximo de membros permitidos em uma safehouse. <LINE> Valor '0' desativa o limite, permitindo número ilimitado de membros.",
 
     Sandbox_SafehousePlus_ShowTicketsButton = "Exibir Botão de Tickets",
@@ -31,5 +31,12 @@ Sandbox_PTBR = {
     Sandbox_SafehousePlus_ShowServerInfoOnLogin = "Exibir Informações do Servidor",
     Sandbox_SafehousePlus_ShowServerInfoOnLogin_tooltip = "Ative para exibir as informações do servidor no canto inferior direito da tela por padrão ao se conectar ao servidor. Desative para ocultar essa informação.",
 
+    Sandbox_SafehousePlus_OwnerLimit = "Limite de Propriedade",
+    Sandbox_SafehousePlus_OwnerLimit_tooltip = "Define o número máximo de safehouses que um jogador pode ser dono.",
 
+    Sandbox_SafehousePlus_SpecialPlayersOwnerLimit = "Limite de Propriedade VIP",
+    Sandbox_SafehousePlus_SpecialPlayersOwnerLimit_tooltip = "Define o número máximo de safehouses que um jogador VIP pode ser dono.",
+
+    Sandbox_SafehousePlus_SpecialPlayersList = "Jogadores VIP",
+    Sandbox_SafehousePlus_SpecialPlayersList_tooltip = "Adicione o nome de usuário dos jogadores VIPs separados por ';'. Jogadores na lista VIP possuem regras especiais para revindicar uma safehouse.",
 }

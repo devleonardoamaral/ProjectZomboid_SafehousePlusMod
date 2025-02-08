@@ -1,4 +1,5 @@
-UIUtils = require("ISUI/SP_UIUtils")
+local SPUtils = require("SP_Utils")
+local UIUtils = require("ISUI/SP_UIUtils")
 
 ISSafehouseUI = ISPanel:derive("ISSafehouseUI")
 ISSafehouseUI.instances = {}
@@ -9,6 +10,8 @@ local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 
 function ISSafehouseUI:initialise()
     ISPanel.initialise(self)
+
+    self.vipPlayers = SPUtils.splitStringIntoLookupTable(SandboxVars.SafehousePlus.SpecialPlayersList, ";")
     
     -- Verifica se o proprietário não está na lista de membros
     -- O jogo, em algumas ocasiões, remove o proprietário da lista de membros
@@ -352,7 +355,7 @@ function ISSafehouseUI:initialise()
 end
 
 function ISSafehouseUI:isAdmin()
-    return not self.player:isAccessLevel("admin")
+    return self.player:isAccessLevel("admin")
 end
 
 function ISSafehouseUI:isOwner(playerName)
@@ -369,6 +372,22 @@ end
 function ISSafehouseUI:isMemberOrOwner(playerName)
     playerName = playerName ~= nil and playerName or self.player:getUsername()
     return self.safehouse:getPlayers():contains(playerName)
+end
+
+function ISSafehouseUI:getPlayerOwnedSafehouseCount(playerName)
+    playerName = playerName ~= nil and playerName or self.player:getUsername()
+    local safehouses = SafeHouse.getSafehouseList()
+    local numOfSafehouses = 0
+
+    for i = 0, safehouses:size() - 1 do
+        local safehouse = safehouses:get(i)
+
+        if safehouse:getOwner() == playerName then
+            numOfSafehouses = numOfSafehouses + 1
+        end
+    end
+
+    return numOfSafehouses
 end
 
 -- Pode apresentar inconsistências antes da execução do ISSafehouseUI:updateScrollableMemberList.
@@ -725,7 +744,25 @@ function ISSafehouseUI:onSafehouseOwnerEntryTextChange()
     else
         local isMember = false
         local isOnline = false
-        local isOwner = false
+        local isVip = self.parent.vipPlayers[newOwner]
+        
+        local ownerLimit = (
+            isVip
+            and SandboxVars.SafehousePlus.SpecialPlayersOwnerLimit 
+            or SandboxVars.SafehousePlus.OwnerLimit
+        )
+        local playerOwnedSafehouseCount = self.parent:getPlayerOwnedSafehouseCount(newOwner)
+        local isReachedOwnedLimit = playerOwnedSafehouseCount >= ownerLimit
+        
+        if isVip then
+            if playerOwnedSafehouseCount >= SandboxVars.SafehousePlus.SpecialPlayersOwnerLimit then
+                isReachedOwnedLimit = true
+            end
+        else
+            if playerOwnedSafehouseCount >= SandboxVars.SafehousePlus.OwnerLimit then
+                isReachedOwnedLimit = true
+            end
+        end
 
         local players = self.parent.safehouse:getPlayers()
         for i = 0, players:size() - 1 do
@@ -746,26 +783,17 @@ function ISSafehouseUI:onSafehouseOwnerEntryTextChange()
             end
         end
 
-        local safes = SafeHouse.getSafehouseList()
-        for i = 0, safes:size() - 1 do
-            local safe = safes:get(i)
-            if safe:getOwner() == newOwner then
-                isOwner = true
-                break
-            end
-        end
-
         if not isAdmin then
             if not isMember then
                 tooltip = getText("Tooltip_SafehousePlus_setNewOwnerEntry_isMember", newOwner)
             elseif not isOnline then
                 tooltip = getText("Tooltip_SafehousePlus_setNewOwnerEntry_isOnline", newOwner)
-            elseif isOwner then
-                tooltip = getText("Tooltip_SafehousePlus_setNewOwnerEntry_isOwner", newOwner)
+            elseif isReachedOwnedLimit then
+                tooltip = getText("Tooltip_SafehousePlus_setNewOwnerEntry_isReachedOwnedLimit", newOwner)
             end
         end
 
-        if (isMember and isOnline and not isOwner) or isAdmin then
+        if (isMember and isOnline and not isReachedOwnedLimit) or isAdmin then
             canSetOwner = true
             setValidColor = true
         end   
@@ -815,7 +843,6 @@ function ISSafehouseUI:prerender()
     end
 
     if self.addMemberEntry and not self.addMemberEntry:isFocused() then
-        self.addMemberEntry:setText("")
         self.addMemberEntry.tooltip = self.addMemberEntryTooltipDefaultText
     end
 end
@@ -879,7 +906,6 @@ end
 
 function ISSafehouseUI:addMemberButtonAction()
     if not self.addMemberEntry.isValid then return end
-
     local newMember = self.addMemberEntry:getInternalText():match("^%s*(.-)%s*$")
     self.safehouse:addPlayer(newMember)
     self:updateScrollableMemberList()

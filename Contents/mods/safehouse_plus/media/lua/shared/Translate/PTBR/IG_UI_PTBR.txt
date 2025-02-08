@@ -51,5 +51,5 @@ IGUI_PTBR = {
    IGUI_ISClaimSafehousesUI_SpawnStatus = "Este é um local de spawn",
    IGUI_ISClaimSafehousesUI_isTooBigStatus = "Este local é grande demais",
    IGUI_ISClaimSafehousesUI_isMemberStatus = "Você já faz parte de uma safehouse",
-   IGUI_ISClaimSafehousesUI_isOwnerStatus = "Você já é proprietário de uma safehouse",
+   IGUI_ISClaimSafehousesUI_isReachedLimit = "Você atingiu o limite máximo de safehouses",
 }

@@ -306,6 +306,7 @@ function ISPlayerSafehousesUI:showSafehouseUI(item)
     safehouseUI:initialise()
     safehouseUI:addToUIManager()
     safehouseUI:bringToTop()
+    self:close()
 end
 
 function ISPlayerSafehousesUI:onOptionMouseDown(button, x, y)

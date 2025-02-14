@@ -282,15 +282,14 @@ end
 function ISClaimSafehouseUI:updateData()
     self.isMember = false
     self.isReachedLimit = false
-
     
-    self.survivedLongEnough = math.floor(self.player:getHoursSurvived() / 24) >= self.survivedDaysToClaim
-
-    if not self.survivedLongEnough then
-        self:updateCanClaim()
-        return
-    end
     if not self.isAdmin then
+        self.survivedLongEnough = math.floor(self.player:getHoursSurvived() / 24) >= self.survivedDaysToClaim
+    
+        if not self.survivedLongEnough then
+            self:updateCanClaim()
+            return
+        end
 
         local playerOwnedSafehouseCount = self:getPlayerOwnedSafehouseCount()
 

@@ -49,6 +49,7 @@ function ISClaimSafehouseUI:initialise()
     self.statusTextEmpty = getText("IGUI_ISClaimSafehousesUI_EmptyStatus")
     self.statusTextSpawn = getText("IGUI_ISClaimSafehousesUI_SpawnStatus")
     self.statusTextIsReachedLimit = getText("IGUI_ISClaimSafehousesUI_isReachedLimit")
+    self.statusTextSurvivedDaysToClaim = getText("IGUI_ISClaimSafehousesUI_daysSurvivedClaim", self.survivedDaysToClaim)
 
     self.maxStatusTextWidth = math.max(
         UIUtils.measureTextX(UIFont.Medium, self.statusTextFail),
@@ -227,7 +228,10 @@ function ISClaimSafehouseUI:updateCanClaim()
 
     local allowNonResidential = getServerOptions():getOption("SafehouseAllowNonResidential") == "true" and true or false
 
-    if self.isReachedLimit then
+    if not self.survivedLongEnough then
+        canClaim = false
+        status = self.statusTextSurvivedDaysToClaim
+    elseif self.isReachedLimit then
         canClaim = false
         status = self.statusTextIsReachedLimit
     elseif self.isMember then
@@ -279,7 +283,15 @@ function ISClaimSafehouseUI:updateData()
     self.isMember = false
     self.isReachedLimit = false
 
+    
+    self.survivedLongEnough = math.floor(self.player:getHoursSurvived() / 24) >= self.survivedDaysToClaim
+
+    if not self.survivedLongEnough then
+        self:updateCanClaim()
+        return
+    end
     if not self.isAdmin then
+
         local playerOwnedSafehouseCount = self:getPlayerOwnedSafehouseCount()
 
         if playerOwnedSafehouseCount >= self.ownerLimit then
@@ -484,6 +496,7 @@ function ISClaimSafehouseUI:new(player)
 
     o.player = player
     o.username = player:getUsername()
+    o.survivedDaysToClaim = tonumber(getServerOptions():getOption("SafehouseDaySurvivedToClaim"))
     o.isAdmin = o.player:isAccessLevel("admin")
 
     o.gridSquare = nil

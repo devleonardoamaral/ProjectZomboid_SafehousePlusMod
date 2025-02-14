@@ -52,4 +52,5 @@ IGUI_PTBR = {
    IGUI_ISClaimSafehousesUI_isTooBigStatus = "Este local é grande demais",
    IGUI_ISClaimSafehousesUI_isMemberStatus = "Você já faz parte de uma safehouse",
    IGUI_ISClaimSafehousesUI_isReachedLimit = "Você atingiu o limite máximo de safehouses",
+   IGUI_ISClaimSafehousesUI_daysSurvivedClaim = "Você precisa sobreviver %1 dias para reivindicar",
 }

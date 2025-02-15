@@ -822,6 +822,22 @@ function ISSafehouseUI:onSafehouseOwnerEntryCommand()
 end
 
 function ISSafehouseUI:onClickRespawn(clickedOption, enabled)
+    -- Remove o respawn em todas as outras safehouses
+    if enabled then
+        local safehouses = SafeHouse.getSafehouseList()
+        local username = self.player:getUsername()
+
+        for i = 0, safehouses:size() - 1 do
+            local safehouse = safehouses:get(i)
+            local respawnEnabled = safehouse:isRespawnInSafehouse(username)
+
+            if respawnEnabled then
+                safehouse:setRespawnInSafehouse(false, username)
+            end
+        end
+    end
+
+    -- Define o respawn na safehouse onde a tickbox foi selecionada
     self.safehouse:setRespawnInSafehouse(enabled, self.player:getUsername())
 end
 

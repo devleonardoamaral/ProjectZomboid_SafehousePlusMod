@@ -347,11 +347,10 @@ function ISSafehouseUI:initialise()
 
     Events.OnTick.Add(self.onDrawSafehouseLimits)
 
-    local x = (getCore():getScreenWidth() - self.width) / 2
-    local y = (getCore():getScreenHeight() - self.height) / 2
-
-    self:setX(x)
-    self:setY(y)
+    if self.centralizeAfterInit then
+        self:setX((getCore():getScreenWidth() - self.width) / 2)
+        self:setY((getCore():getScreenHeight() - self.height) / 2)
+    end
 end
 
 function ISSafehouseUI:isAdmin()
@@ -543,10 +542,6 @@ function ISSafehouseUI:updateButtons()
             self.exitSafehouseButton.enable = false
         end
     end
-end
-
-function ISSafehouseUI:onClickRespawn(clickedOption, enabled)
-    self.safehouse:setRespawnInSafehouse(enabled, self.player:getUsername())
 end
 
 function ISSafehouseUI:onClickShowSafehouseLimits(clickedOption, enabled)
@@ -1006,12 +1001,15 @@ function ISSafehouseUI.updateInstance(id)
     local safehouse = instance.safehouse
     local x = instance:getAbsoluteX()
     local y = instance:getAbsoluteY()
+    local width = instance.width
+    local height = instance.height
     local highlightLimits = instance.highlightLimits
 
     instance:close()
 
-    local safehouseUI = ISSafehouseUI:new(x, y, 500, 450, safehouse, player)
+    local safehouseUI = ISSafehouseUI:new(x, y, width, height, safehouse, player)
     safehouseUI.highlightLimits = highlightLimits
+    safehouseUI.centralizeAfterInit = false
     safehouseUI:initialise()
     safehouseUI:addToUIManager()
     safehouseUI:bringToTop()
@@ -1033,15 +1031,15 @@ function ISSafehouseUI:new(x, y, width, height, safehouse, player)
     setmetatable(o, self)
     self.__index = self
 
-    if y == 0 then
-        o.y = o:getMouseY() - (height / 2)
-        o:setY(o.y)
+    if x == 0 then
+        o:setX((getCore():getScreenWidth() - o:getWidth()) / 2)
     end
 
-    if x == 0 then
-        o.x = o:getMouseX() - (width / 2)
-        o:setX(o.x)
+    if y == 0 then
+        o:setY((getCore():getScreenHeight() - o:getHeight()) / 2)
     end
+
+    o.centralizeAfterInit = true
 
     o.player = player
     o.safehouse = safehouse
@@ -1061,8 +1059,6 @@ function ISSafehouseUI:new(x, y, width, height, safehouse, player)
 
     o.safehouseSize = (o.x2 + 1 - o.x1) * (o.y2 + 1 - o.y1) 
 
-    o.width = width
-    o.height = height
     o.padX = 20
     o.moveWithMouse = true
     

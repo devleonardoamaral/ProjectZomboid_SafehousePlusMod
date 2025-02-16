@@ -1,5 +1,4 @@
 local function onJoypadOpenUserPanelUI(target, playerNum)
-
     local x = (playerNum % 2) + 1
     local y = math.floor(playerNum / 2) + 1
     local userPanel = ISUserPanelUI:new(-x, -y, 1, 1, getSpecificPlayer(playerNum))
@@ -16,12 +15,16 @@ local function OnFillWorldObjectContextMenu(playerNum, context, worldObjects, te
 
     local option = context:getOptionFromName(getText("ContextMenu_SafehouseClaim"))
     if option then
-        local tooltip = ISWorldObjectContextMenu.addToolTip()
-        -- tooltip:setName(getText("ContextMenu_SafehouseClaim"))
-        tooltip.description = "<RGB:1,0,0> " .. getText("Tooltip_SafehousePlus_ContextMenu_Warning")
-        tooltip:setName(getText("Tooltip_SafehousePlus_ContextMenu_WarningName"))
-        option.toolTip = tooltip
-        option.notAvailable = true
+        option.toolTip = nil
+        option.target = nil
+        option.param1 = getPlayer()
+        option.onSelect = function (target, player)
+            local claimUI = ISClaimSafehouseUI:new(player)
+            claimUI:initialise()
+            claimUI:addToUIManager()
+            claimUI:bringToTop()
+        end
+        option.notAvailable = false
     end
 end
 

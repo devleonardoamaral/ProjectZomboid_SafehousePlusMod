@@ -40,27 +40,27 @@ function ISClaimSafehouseUI:initialise()
     self.claimButtonTextWidth = UIUtils.measureTextX(UIFont.Small, self.claimButtonText)
     self.cancelButtonTextWidth = UIUtils.measureTextX(UIFont.Small, self.cancelButtonText)
 
-    self.statusTextFail = getText("IGUI_ISClaimSafehousesUI_FailStatus")
-    self.statusTextSuccess = getText("IGUI_ISClaimSafehousesUI_SuccessStatus")
-    self.statusTextIsMember = getText("IGUI_ISClaimSafehousesUI_isMemberStatus")
-    self.statusTextIsTooBig = getText("IGUI_ISClaimSafehousesUI_isTooBigStatus")
-    self.statusTextOverlap = getText("IGUI_ISClaimSafehousesUI_OverlapStatus")
-    self.statusTextResidential = getText("IGUI_ISClaimSafehousesUI_ResidentialStatus")
-    self.statusTextEmpty = getText("IGUI_ISClaimSafehousesUI_EmptyStatus")
-    self.statusTextSpawn = getText("IGUI_ISClaimSafehousesUI_SpawnStatus")
-    self.statusTextIsReachedLimit = getText("IGUI_ISClaimSafehousesUI_isReachedLimit")
-    self.statusTextSurvivedDaysToClaim = getText("IGUI_ISClaimSafehousesUI_daysSurvivedClaim", self.survivedDaysToClaim)
+    self.statusText_Success = getText("IGUI_ISClaimSafehousesUI_Status_Success")
+    self.statusText_OutsideArea = getText("IGUI_ISClaimSafehousesUI_Status_OutsideArea")
+    self.statusText_OverlapExistingSafehouse = getText("IGUI_ISClaimSafehousesUI_Status_OverlapsExistingSafehouse")
+    self.statusText_NotResidential = getText("IGUI_ISClaimSafehousesUI_Status_NotResidential")
+    self.statusText_ClaimBlockedByEntities = getText("IGUI_ISClaimSafehousesUI_Status_ClaimBlockedByEntities")
+    self.statusText_SpawnLocation = getText("IGUI_ISClaimSafehousesUI_Status_SpawnLocation")
+    self.statusText_AreaTooLarge = getText("IGUI_ISClaimSafehousesUI_Status_AreaTooLarge")
+    self.statusText_AlreadyMember = getText("IGUI_ISClaimSafehousesUI_Status_AlreadyMember")
+    self.statusText_MaxSafehousesReached = getText("IGUI_ISClaimSafehousesUI_Status_MaxSafehousesReached")
+    self.statusText_SurvivalDaysRequired = getText("IGUI_ISClaimSafehousesUI_Status_SurvivalDaysRequired", self.survivedDaysToClaim)
 
     self.maxStatusTextWidth = math.max(
-        UIUtils.measureTextX(UIFont.Medium, self.statusTextFail),
-        UIUtils.measureTextX(UIFont.Medium, self.statusTextSuccess),
-        UIUtils.measureTextX(UIFont.Medium, self.statusTextIsMember),
-        UIUtils.measureTextX(UIFont.Medium, self.statusTextIsTooBig),
-        UIUtils.measureTextX(UIFont.Medium, self.statusTextOverlap),
-        UIUtils.measureTextX(UIFont.Medium, self.statusTextResidential),
-        UIUtils.measureTextX(UIFont.Medium, self.statusTextEmpty),
-        UIUtils.measureTextX(UIFont.Medium, self.statusTextSpawn),
-        UIUtils.measureTextX(UIFont.Medium, self.statusTextIsReachedLimit)
+        UIUtils.measureTextX(UIFont.Medium, self.statusText_OutsideArea),
+        UIUtils.measureTextX(UIFont.Medium, self.statusText_Success),
+        UIUtils.measureTextX(UIFont.Medium, self.statusText_AlreadyMember),
+        UIUtils.measureTextX(UIFont.Medium, self.statusText_AreaTooLarge),
+        UIUtils.measureTextX(UIFont.Medium, self.statusText_OverlapExistingSafehouse),
+        UIUtils.measureTextX(UIFont.Medium, self.statusText_NotResidential),
+        UIUtils.measureTextX(UIFont.Medium, self.statusText_ClaimBlockedByEntities),
+        UIUtils.measureTextX(UIFont.Medium, self.statusText_SpawnLocation),
+        UIUtils.measureTextX(UIFont.Medium, self.statusText_MaxSafehousesReached)
     )
 
     self.buttonHeight = math.max(25, FONT_HGT_SMALL + 6)
@@ -87,7 +87,7 @@ function ISClaimSafehouseUI:initialise()
     self.StatusLabel = ISLabel:new(
         self.width / 2, y, 
         self.statsLabelHeight, 
-        self.statusTextFail, 
+        self.statusText_OutsideArea, 
         self.highlightNotColor.r,self.highlightNotColor.g,self.highlightNotColor.b,self.highlightNotColor.a, 
         UIFont.Medium, true
     )
@@ -218,7 +218,7 @@ function ISClaimSafehouseUI:updateCoords(x1, y1, x2, y2)
 end
 
 function ISClaimSafehouseUI:updateCanClaim()
-    local status = self.statusTextSuccess
+    local status = self.statusText_Success
     local canClaim = true
     local isResidential = false
 
@@ -230,31 +230,31 @@ function ISClaimSafehouseUI:updateCanClaim()
 
     if not self.survivedLongEnough then
         canClaim = false
-        status = self.statusTextSurvivedDaysToClaim
+        status = self.statusText_SurvivalDaysRequired
     elseif self.isReachedLimit then
         canClaim = false
-        status = self.statusTextIsReachedLimit
+        status = self.statusText_MaxSafehousesReached
     elseif self.isMember then
         canClaim = false
-        status = self.statusTextIsMember
+        status = self.statusText_AlreadyMember
     elseif not (self.x1 and self.y1 and self.x2 and self.y2 and self.safeWidth and self.safeHeight) then
         canClaim = false
-        status = self.statusTextFail
+        status = self.statusText_OutsideArea
     elseif self.isTooBig then
         canClaim = false
-        status = self.statusTextIsTooBig
+        status = self.statusText_AreaTooLarge
     elseif not allowNonResidential and not isResidential then
         canClaim = false
-        status = self.statusTextResidential
+        status = self.statusText_NotResidential
     elseif self.overlap then
         canClaim = false
-        status = self.statusTextOverlap
+        status = self.statusText_OverlapExistingSafehouse
     elseif self.occupied then
         canClaim = false
-        status = self.statusTextEmpty
+        status = self.statusText_ClaimBlockedByEntities
     elseif self.isSpawn then
         canClaim = false
-        status = self.statusTextSpawn
+        status = self.statusText_SpawnLocation
     end
 
     self.canClaim = canClaim

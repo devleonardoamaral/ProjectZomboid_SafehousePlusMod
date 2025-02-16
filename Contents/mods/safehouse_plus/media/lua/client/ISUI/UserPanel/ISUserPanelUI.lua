@@ -1,7 +1,7 @@
 require "ISUI/ISPanel"
 require "ISUI/UserPanel/SP_ISPlayerSafehousesUI"
 require "ISUI/UserPanel/SP_ISClaimSafehouseUI"
-local UIUtils = require("ISUI/SP_UIUtils")
+local UIUtils = require("SP_UIUtils")
 
 ISUserPanelUI = ISPanel:derive("ISUserPanelUI")
 

@@ -4,7 +4,7 @@ require "ISUI/ISLabel"
 require "ISUI/ISScrollingListBox"
 require "ISUI/ISTextEntryBox"
 
-local UIUtils = require("ISUI/SP_UIUtils")
+local UIUtils = require("SP_UIUtils")
 
 ISPlayerSafehousesUI = ISPanel:derive("ISPlayerSafehousesUI")
 

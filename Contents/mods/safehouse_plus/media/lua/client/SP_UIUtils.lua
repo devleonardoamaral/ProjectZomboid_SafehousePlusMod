@@ -47,4 +47,12 @@ function UIUtils.createLabel(object, x, y, height, text, font, color, alignLeft,
     return label
 end
 
+-- Centraliza o objeto de UI na tela, garantindo que ele fique posicionado no meio horizontal e verticalmente.
+function UIUtils.centerUIElementOnScreen(object, xOffset, yOffset)
+    local screenWidth = getCore():getScreenWidth()
+    local screenHeight = getCore():getScreenHeight()
+    object:setX((screenWidth - object.width) / 2 + (xOffset or 0))
+    object:setY((screenHeight - object.height) / 2 + (yOffset or 0))
+end
+
 return UIUtils

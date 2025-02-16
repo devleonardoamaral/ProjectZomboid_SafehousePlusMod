@@ -1,6 +1,6 @@
 require "ISUI/ISPanel"
 require "SP_SpawnPoints"
-local UIUtils = require("ISUI/SP_UIUtils")
+local UIUtils = require("SP_UIUtils")
 local SPUtils = require("SP_Utils")
 
 ISClaimSafehouseUI = ISPanel:derive("ISClaimSafehouseUI")

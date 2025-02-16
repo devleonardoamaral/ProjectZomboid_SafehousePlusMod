@@ -1,5 +1,5 @@
 local SPUtils = require("SP_Utils")
-local UIUtils = require("ISUI/SP_UIUtils")
+local UIUtils = require("SP_UIUtils")
 
 ISSafehouseUI = ISPanel:derive("ISSafehouseUI")
 ISSafehouseUI.instances = {}

@@ -1,0 +1,16 @@
+Tooltip_JP = {
+    Tooltip_IGUI_UserPanel_SafehouseButton_Disabled = "あなたはどのセーフハウスにも所属していません。",
+
+    Tooltip_SafehousePlus_AddMemberEntry_AlreadyInASafehouse = "%1 はすでに別のセーフハウスに所属しています。",
+    Tooltip_SafehousePlus_AddMemberEntry_WrongEntry = "これは有効なユーザー名ではありません。",
+    Tooltip_SafehousePlus_AddMemberEntry_AlreadyIsMember = "%1 はすでにこのセーフハウスのメンバーです。",
+    Tooltip_SafehousePlus_AddMemberEntry_ReachedLimit = "セーフハウスのメンバー上限に達しています。",
+    Tooltip_SafehousePlus_AddMemberEntry_Default = "ユーザー名を入力し、ENTERを押すか「メンバー追加」ボタンをクリックしてメンバーに追加してください。",
+
+    Tooltip_SafehousePlus_setNewOwnerEntry_isMember = "%1 はこのセーフハウスのメンバーではありません。",
+    Tooltip_SafehousePlus_setNewOwnerEntry_isOnline = "%1 はオンラインである必要があります。 <LINE> 所有権を譲渡するにはオンライン状態にしてください。",
+    Tooltip_SafehousePlus_setNewOwnerEntry_isReachedOwnedLimit = "%1 はセーフハウスの所有上限に達しています。",
+    Tooltip_SafehousePlus_setNewOwnerEntry_Default = "所有権を譲渡したいプレイヤーのユーザー名を入力し、ENTERを押して確定してください。",
+
+    Tooltip_SafehousePlus_setNewSafehouseNameEntry_Default = "セーフハウスの名前を入力し、ENTERを押して確定してください。",
+}

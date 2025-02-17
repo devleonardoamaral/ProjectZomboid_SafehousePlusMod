@@ -1,0 +1,42 @@
+Sandbox_JP = {
+    Sandbox_SafehousePlus = "セーフハウスプラス",
+    Sandbox_SafehousePlusClientPanel = "セーフハウスプラス:クライアントパネル",
+    Sandbox_SafehousePlusInterface = "セーフハウスプラス:インターフェース",
+    Sandbox_SafehousePlusRules = "セーフハウスプラス:ルール",
+
+    Sandbox_SafehousePlus_MultipleSafehouse = "複数のセーフハウスを許可",
+    Sandbox_SafehousePlus_MultipleSafehouse_tooltip = "プレイヤーが同時に複数のセーフハウスに所属できるようにします。",
+
+    Sandbox_SafehousePlus_MemberLimit = "メンバーの最大人数",
+    Sandbox_SafehousePlus_MemberLimit_tooltip = "セーフハウスに所属できるメンバーの最大人数を設定します。 <LINE> '0'に設定すると制限が無効になり、無制限にメンバーを追加できます。",
+
+    Sandbox_SafehousePlus_ShowTicketsButton = "チケットボタンを表示",
+    Sandbox_SafehousePlus_ShowTicketsButton_tooltip = "クライアントパネルのチケットボタンの表示・非表示を設定します。有効にすると表示、無効にすると非表示になります。",
+
+    Sandbox_SafehousePlus_ShowServerOptionsButton = "サーバーオプションボタンを表示",
+    Sandbox_SafehousePlus_ShowServerOptionsButton_tooltip = "クライアントパネルのサーバーオプションボタンの表示・非表示を設定します。有効にすると表示、無効にすると非表示になります。",
+
+    Sandbox_SafehousePlus_FloorHighlighOnClaimUIOpen = "登録時に床をハイライト",
+    Sandbox_SafehousePlus_FloorHighlighOnClaimUIOpen_tooltip = "セーフハウスの登録インターフェースを開いた際に自動で床をハイライトするかどうかを設定します。無効にするとハイライトなしで開始します。",
+
+    Sandbox_SafehousePlus_MaxSafehouseSize = "セーフハウスの最大サイズ",
+    Sandbox_SafehousePlus_MaxSafehouseSize_tooltip = "セーフハウス登録時に設定できる最大サイズ（横と縦）を指定します。 <LINE> 注意: 非常に大きな値を設定すると登録インターフェースを開く際にラグが発生する可能性があります。慎重に調整してください！",
+
+    Sandbox_SafehousePlus_ShowPingOnLogin = "ログイン時にPingを表示",
+    Sandbox_SafehousePlus_ShowPingOnLogin_tooltip = "サーバー接続時、画面右下にプレイヤーのPingをデフォルトで表示します。無効にすると非表示になります。",
+
+    Sandbox_SafehousePlus_ShowConnectionInfoOnLogin = "接続情報を表示",
+    Sandbox_SafehousePlus_ShowServerInfoOnLogin_tooltip = "サーバー接続時、画面右下に接続情報をデフォルトで表示します。無効にすると非表示になります。",
+
+    Sandbox_SafehousePlus_ShowServerInfoOnLogin = "サーバー情報を表示",
+    Sandbox_SafehousePlus_ShowServerInfoOnLogin_tooltip = "サーバー接続時、画面右下にサーバー情報をデフォルトで表示します。無効にすると非表示になります。",
+
+    Sandbox_SafehousePlus_OwnerLimit = "所有上限",
+    Sandbox_SafehousePlus_OwnerLimit_tooltip = "プレイヤーが所有できるセーフハウスの最大数を設定します。",
+
+    Sandbox_SafehousePlus_SpecialPlayersOwnerLimit = "VIP所有上限",
+    Sandbox_SafehousePlus_SpecialPlayersOwnerLimit_tooltip = "VIPプレイヤーが所有できるセーフハウスの最大数を設定します。",
+
+    Sandbox_SafehousePlus_SpecialPlayersList = "VIPプレイヤー",
+    Sandbox_SafehousePlus_SpecialPlayersList_tooltip = "VIPプレイヤーのユーザー名を「;」で区切って追加します。このリストに含まれるVIPプレイヤーは、特別なセーフハウス登録ルールが適用されます。",
+}

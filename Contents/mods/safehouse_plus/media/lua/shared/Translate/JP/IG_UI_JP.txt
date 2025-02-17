@@ -1,0 +1,56 @@
+IGUI_JP = {
+   IGUI_SafehouseUI_Safehouse = "セーフハウス",
+   IGUI_UserPanel_ShowSelfUsername = "自分のユーザー名を表示",
+
+   IGUI_SafehouseUI_SafehouseLimits = "セーフハウスの制限を表示",
+   IGUI_SafehouseUI_Respawn = "このセーフハウスでリスポーン",
+
+   IGUI_ISPlayerSafehousesUI_Title = "%1のセーフハウス",
+   IGUI_ISPlayerSafehousesUI_ItemName = "名前",
+   IGUI_ISPlayerSafehousesUI_ItemOwner = "所有者",
+   IGUI_ISPlayerSafehousesUI_ItemCoord = "座標",
+   IGUI_ISPlayerSafehousesUI_FilterLabel = "フィルター",
+   IGUI_ISPlayerSafehousesUI_ClaimButton = "セーフハウスとして登録",
+
+   IGUI_ISSafehouseUI_Title = "セーフハウス",
+
+   IGUI_ISSafehouseUI_ScrollListLabel = "メンバーリスト",
+   IGUI_ISSafehouseUI_AddMemberLabel = "メンバーを追加",
+   IGUI_ISSafehouseUI_ManageSafehouseLabel = "セーフハウスを管理",
+
+   IGUI_ISSafehouseUI_CoordLabel = "座標",
+   IGUI_ISSafehouseUI_SizeLabel = "サイズ",
+   IGUI_ISSafehouseUI_NameLabel = "名前を変更",
+   IGUI_ISSafehouseUI_OwnerLabel = "所有者を変更",
+   IGUI_ISSafehouseUI_SafehouseMembersLabel = "メンバー",
+   IGUI_ISSafehouseUI_SafehouseMembersUnlimitedLabel = "無制限",
+
+   IGUI_ISSafehouseUI_ReloadButton = "リロード",
+   IGUI_ISSafehouseUI_TeleportButton = "テレポート",
+   IGUI_ISSafehouseUI_AddMemberButton = "メンバーを追加",
+   IGUI_ISSafehouseUI_RemoveMemberButton = "メンバーを削除",
+   IGUI_ISSafehouseUI_ExitSafehouseButton = "セーフハウスを退出",
+   IGUI_ISSafehouseUI_ReleaseSafehouseButton = "セーフハウスを解放",
+
+   IGUI_ISSafehouseUI_ItemOwnerTag = "所有者",
+   IGUI_ISSafehouseUI_ItemMemberTag = "メンバー",
+
+   IGUI_ISSafehouseUI_Dialog_OwnerChange = "所有者が変更されました！",
+   IGUI_ISSafehouseUI_Dialog_SafehouseNameChange = "セーフハウスの名前が変更されました！",
+
+   IGUI_ISClaimSafehousesUI_Title = "登録メニュー",
+   IGUI_ISClaimSafehousesUI_ClaimButton = "登録",
+   IGUI_ISClaimSafehousesUI_VerifyButton = "利用可能か確認",
+
+   IGUI_ISClaimSafehousesUI_SuccessStatus = "このセーフハウスは利用可能です",
+   IGUI_ISClaimSafehousesUI_FailStatus = "あなたはセーフハウス内にいません",
+   
+   IGUI_ISClaimSafehousesUI_OverlapStatus = "この場所は他のセーフハウスと重なっています",
+   IGUI_ISClaimSafehousesUI_EmptyStatus = "この場所は制圧されていません",
+   IGUI_ISClaimSafehousesUI_ResidentialStatus = "この場所は住宅地ではありません",
+   IGUI_ISClaimSafehousesUI_SpawnStatus = "この場所はスポーン地点です",
+   IGUI_ISClaimSafehousesUI_isTooBigStatus = "この場所は大きすぎます",
+   IGUI_ISClaimSafehousesUI_isMemberStatus = "あなたはすでにセーフハウスのメンバーです",
+   IGUI_ISClaimSafehousesUI_isReachedLimit = "セーフハウスの所有上限に達しています",
+   IGUI_ISClaimSafehousesUI_daysSurvivedClaim = "セーフハウスを請求するには%1日生存する必要があります",
+}

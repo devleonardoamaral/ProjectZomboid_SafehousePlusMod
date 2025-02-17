@@ -22,6 +22,9 @@ Sandbox_EN = {
     Sandbox_SafehousePlus_MaxSafehouseSize = "Maximum Safehouse Size",
     Sandbox_SafehousePlus_MaxSafehouseSize_tooltip = "Sets the maximum size (width and height) that a safehouse can have when claimed. <LINE> WARNING: Very high values may cause lag when opening the claim interface. Adjust with caution!",
 
+    Sandbox_SafehousePlus_MaxSafehouseFloors = "Maximum Number of Floors",
+    Sandbox_SafehousePlus_MaxSafehouseFloors_tooltip = "Defines the maximum number of floors a safehouse can have to be claimed."
+
     Sandbox_SafehousePlus_ShowPingOnLogin = "Show Ping on Login",
     Sandbox_SafehousePlus_ShowPingOnLogin_tooltip = "Enable to show the player's ping in the bottom-right corner of the screen by default when connecting to the server. Disable to hide this information.",
 

@@ -50,4 +50,11 @@ IGUI_PTBR = {
    IGUI_ISClaimSafehousesUI_Status_AlreadyMember = "Você já faz parte de uma safehouse",
    IGUI_ISClaimSafehousesUI_Status_MaxSafehousesReached = "Você atingiu o limite máximo de safehouses",
    IGUI_ISClaimSafehousesUI_Status_SurvivalDaysRequired = "Você precisa sobreviver %1 dias para reivindicar",
+   IGUI_ISClaimSafehousesUI_Status_ExceedsMaxFloors = "Este edifício é muito alto para ser uma safehouse",
+   IGUI_ISClaimSafehousesUI_Label_Area = "Área",
+   IGUI_ISClaimSafehousesUI_Label_Floors = "Andares",
+   IGUI_ISClaimSafehousesUI_Label_Dimensions = "Tamanho",
+   IGUI_ISClaimSafehousesUI_Label_Unavailable = "Indisponível",
+   IGUI_ISClaimSafehousesUI_Tiles = "tiles",
+   IGUI_ISClaimSafehousesUI_Power = "²",
 }

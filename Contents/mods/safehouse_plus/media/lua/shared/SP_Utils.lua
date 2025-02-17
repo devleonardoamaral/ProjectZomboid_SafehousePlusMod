@@ -27,4 +27,19 @@ function Utils.splitStringIntoLookupTable(text, separator)
     return result
 end
 
+function Utils.getOwnedSafehouses(playerName)    
+    local safehouses = SafeHouse.getSafehouseList()
+    local playerSafehouses = {}
+
+    for i = 0, safehouses:size() - 1 do
+        local safehouse = safehouses:get(i)
+
+        if safehouse:getOwner() == playerName then
+            table.insert(playerSafehouses, safehouse)
+        end
+    end
+
+    return playerSafehouses
+end
+
 return Utils

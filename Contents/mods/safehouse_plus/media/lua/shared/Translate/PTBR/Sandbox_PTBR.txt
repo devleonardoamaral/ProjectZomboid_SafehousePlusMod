@@ -22,6 +22,9 @@ Sandbox_PTBR = {
     Sandbox_SafehousePlus_MaxSafehouseSize = "Tamanho Máximo da Safehouse",
     Sandbox_SafehousePlus_MaxSafehouseSize_tooltip = "Define o tamanho máximo (largura e altura) que uma safehouse pode ter ao ser reivindicada. <LINE> AVISO: Valores muito altos podem causar lentidão ao abrir a interface de reivindicação. Ajuste com cuidado!",
 
+    Sandbox_SafehousePlus_MaxSafehouseFloors = "Número Máximo de Andares",
+    Sandbox_SafehousePlus_MaxSafehouseFloors_tooltip = "Define a quantidade máxima de andares que uma safehouse pode ter para ser reivindicada.",
+
     Sandbox_SafehousePlus_ShowPingOnLogin = "Exibir Ping ao Conectar",
     Sandbox_SafehousePlus_ShowPingOnLogin_tooltip = "Ative para exibir o ping do jogador no canto inferior direito da tela por padrão ao se conectar ao servidor. Desative para ocultar essa informação.",
 

@@ -298,7 +298,7 @@ function ISClaimSafehouseUI:updateData()
             return
         end
 
-        local numOwnedSafehouses = #Utils.getOwnedSafehouses(self.username)
+        local numOwnedSafehouses = #SPUtils.getOwnedSafehouses(self.username)
 
         if numOwnedSafehouses >= self.maxSafehousesLimit then
             self.isReachedLimit = true

@@ -13,7 +13,4 @@ Tooltip_EN = {
     Tooltip_SafehousePlus_setNewOwnerEntry_Default = "Type the username of the player you want to transfer ownership to and press ENTER to confirm."
 
     Tooltip_SafehousePlus_setNewSafehouseNameEntry_Default = "Type a name for the safehouse and press ENTER to confirm."
-
-    Tooltip_SafehousePlus_ContextMenu_WarningName = "No longer available here!", 
-    Tooltip_SafehousePlus_ContextMenu_Warning = "Due to the new safehouse claiming system, it is no longer possible to use the context menu. <LINE> <LINE> Go to 'Client > Safehouses > Claim Safehouse' to claim a safehouse.",
 }

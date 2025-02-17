@@ -13,7 +13,4 @@ Tooltip_PTBR = {
     Tooltip_SafehousePlus_setNewOwnerEntry_Default = "Digite o nome de usuário qual você deseja transferir a propriedade e pressione ENTER para confirmar.",
 
     Tooltip_SafehousePlus_setNewSafehouseNameEntry_Default = "Digite um nome para a safehouse e pressione ENTER para confirmar.",
-
-    Tooltip_SafehousePlus_ContextMenu_WarningName = "Não é mais por aqui!",
-    Tooltip_SafehousePlus_ContextMenu_Warning = "Devido ao novo sistema de reivindicação de safehouses, não é mais possível utilizar o menu de contexto. <LINE> <LINE> Vá em 'Cliente > Safehouses > Reivindicar Safehouse' para reivindicar uma safehouse.",
 }

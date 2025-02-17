@@ -29,8 +29,8 @@ function UIUtils.highlightSquare(sq, r, g, b, a)
 end
 
 -- Cria e adiciona um botão a um objeto de UI.
-function UIUtils.createButton(object, x, y, width, height, text, onClick)
-    local button = ISButton:new(x, y, width, height, text, object, onClick)
+function UIUtils.createButton(object, x, y, width, height, text, target, onClick)
+    local button = ISButton:new(x, y, width, height, text, target, onClick)
     button:initialise()
     button:instantiate()
     object:addChild(button)

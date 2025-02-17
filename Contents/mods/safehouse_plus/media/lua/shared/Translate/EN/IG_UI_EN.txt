@@ -2,7 +2,7 @@ IGUI_EN = {
    IGUI_SafehouseUI_Safehouse = "Safehouses",
    IGUI_UserPanel_ShowSelfUsername = "Show Your Username",
 
-   IGUI_SafehouseUI_SafehouseLimits = "Show Safehouse Limits",
+   IGUI_SafehouseUI_TickBox_HighlightLocation = "Show Safehouse Limits",
    IGUI_SafehouseUI_Respawn = "Respawn in this Safehouse",
 
    IGUI_ISPlayerSafehousesUI_Title = "%1'S SAFEHOUSES",
@@ -39,9 +39,7 @@ IGUI_EN = {
    IGUI_ISSafehouseUI_Dialog_SafehouseNameChange = "Safehouse name changed!",
 
    IGUI_ISClaimSafehousesUI_Title = "CLAIM MENU",
-   IGUI_ISClaimSafehousesUI_ClaimButton = "CLAIM",
-   IGUI_ISClaimSafehousesUI_VerifyButton = "CHECK AVAILABILITY",
-
+   IGUI_ISClaimSafehousesUI_Button_Claim = "CLAIM",
    IGUI_ISClaimSafehousesUI_Status_Success = "This safehouse is available",
    IGUI_ISClaimSafehousesUI_Status_OutsideArea = "You are not in a safehouse",
    IGUI_ISClaimSafehousesUI_Status_OverlapsExistingSafehouse = "This location overlaps with a safehouse",

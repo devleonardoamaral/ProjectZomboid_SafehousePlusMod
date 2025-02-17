@@ -13,137 +13,77 @@ local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 function ISClaimSafehouseUI:initialise()
     ISPanel.initialise(self)
 
-    self.vipPlayers = SPUtils.splitStringIntoLookupTable(SandboxVars.SafehousePlus.SpecialPlayersList, ";")
-    self.isVip = self.vipPlayers[self.username]
-    self.ownerLimit = (
-        self.isVip
-        and SandboxVars.SafehousePlus.SpecialPlayersOwnerLimit 
-        or SandboxVars.SafehousePlus.OwnerLimit
-    )
-
     local y = 70
 
-    self.padX = 20
-    self.padY = 20
-    self.shortPadX = self.padX / 2
-    self.shortPadY = self.padY / 2
-
-    local btnWid = (self.width - (2.5 * self.padX)) / 2
-
-    self.titleFont = UIFont.Medium
-    self.titleText = getText("IGUI_ISClaimSafehousesUI_Title")
-    self.titleTextWidth = UIUtils.measureTextX(self.titleFont, self.titleText)
-
-    self.claimButtonText = getText("IGUI_ISClaimSafehousesUI_ClaimButton")
-    self.cancelButtonText = getText("UI_btn_close")
-
-    self.claimButtonTextWidth = UIUtils.measureTextX(UIFont.Small, self.claimButtonText)
-    self.cancelButtonTextWidth = UIUtils.measureTextX(UIFont.Small, self.cancelButtonText)
-
-    self.statusText_Success = getText("IGUI_ISClaimSafehousesUI_Status_Success")
-    self.statusText_OutsideArea = getText("IGUI_ISClaimSafehousesUI_Status_OutsideArea")
-    self.statusText_OverlapExistingSafehouse = getText("IGUI_ISClaimSafehousesUI_Status_OverlapsExistingSafehouse")
-    self.statusText_NotResidential = getText("IGUI_ISClaimSafehousesUI_Status_NotResidential")
-    self.statusText_ClaimBlockedByEntities = getText("IGUI_ISClaimSafehousesUI_Status_ClaimBlockedByEntities")
-    self.statusText_SpawnLocation = getText("IGUI_ISClaimSafehousesUI_Status_SpawnLocation")
-    self.statusText_AreaTooLarge = getText("IGUI_ISClaimSafehousesUI_Status_AreaTooLarge")
-    self.statusText_AlreadyMember = getText("IGUI_ISClaimSafehousesUI_Status_AlreadyMember")
-    self.statusText_MaxSafehousesReached = getText("IGUI_ISClaimSafehousesUI_Status_MaxSafehousesReached")
-    self.statusText_SurvivalDaysRequired = getText("IGUI_ISClaimSafehousesUI_Status_SurvivalDaysRequired", self.survivedDaysToClaim)
-
-    self.maxStatusTextWidth = math.max(
-        UIUtils.measureTextX(UIFont.Medium, self.statusText_OutsideArea),
-        UIUtils.measureTextX(UIFont.Medium, self.statusText_Success),
-        UIUtils.measureTextX(UIFont.Medium, self.statusText_AlreadyMember),
-        UIUtils.measureTextX(UIFont.Medium, self.statusText_AreaTooLarge),
-        UIUtils.measureTextX(UIFont.Medium, self.statusText_OverlapExistingSafehouse),
-        UIUtils.measureTextX(UIFont.Medium, self.statusText_NotResidential),
-        UIUtils.measureTextX(UIFont.Medium, self.statusText_ClaimBlockedByEntities),
-        UIUtils.measureTextX(UIFont.Medium, self.statusText_SpawnLocation),
-        UIUtils.measureTextX(UIFont.Medium, self.statusText_MaxSafehousesReached)
+    self.label_StatusMessage = UIUtils.createLabel(
+        self, self.width / 2, y,
+        self.labelHeight,
+        self.statusText_OutsideArea,
+        UIFont.Medium,
+        {
+            r = self.highlightNotColor.r, 
+            g = self.highlightNotColor.g, 
+            b = self.highlightNotColor.b, 
+            a = self.highlightNotColor.a
+        },
+        true, 
+        true
     )
 
-    self.buttonHeight = math.max(25, FONT_HGT_SMALL + 6)
-    self.minButtonWidth = 200
-    self.buttonWidth = math.max(
-        (math.max(self.titleTextWidth, self.maxStatusTextWidth) / 2) - self.shortPadX,
-        (math.max(self.claimButtonTextWidth, self.cancelButtonTextWidth) / 2) + 20,
-        self.minButtonWidth
-    )
-
-    self:setWidth(
-        math.max(
-            self.titleTextWidth,
-            self.maxStatusTextWidth,
-            (self.buttonWidth * 2) + self.shortPadX
-        ) + (2 * self.padX)
-    )
-
-    self.statsLabelHeight = FONT_HGT_MEDIUM + 6
-
-    self.highlightTickBoxText = getText("IGUI_SafehouseUI_SafehouseLimits")
-    self.highlightTickBoxWidth = UIUtils.measureTextX(UIFont.Small, self.highlightTickBoxText) + 18
-
-    self.StatusLabel = ISLabel:new(
-        self.width / 2, y, 
-        self.statsLabelHeight, 
-        self.statusText_OutsideArea, 
-        self.highlightNotColor.r,self.highlightNotColor.g,self.highlightNotColor.b,self.highlightNotColor.a, 
-        UIFont.Medium, true
-    )
-    self.StatusLabel.center = true
-    self.StatusLabel:initialise()
-    self.StatusLabel:instantiate()
-    self:addChild(self.StatusLabel)
-    y = y + self.statsLabelHeight + (self.padY * 1.5)
+    y = y + self.labelHeight + (self.padY * 1.5)
 
     self.showHighlightTickBox = ISTickBox:new(
-        UIUtils.centerWidget(self.highlightTickBoxWidth, self.width), 
+        UIUtils.centerWidget(self.tickBoxWidth, self.width), 
         y, 
-        self.highlightTickBoxWidth, 18, 
+        self.tickBoxWidth, 18, 
         "", 
         self, 
         ISClaimSafehouseUI.onClickShowHighlight
     )
     self.showHighlightTickBox:initialise()
     self.showHighlightTickBox:instantiate()
-    self.showHighlightTickBox.selected[1] = self.showHighlighted
-    self.showHighlightTickBox:addOption(self.highlightTickBoxText)
+    self.showHighlightTickBox.selected[1] = self.isPerimeterHighlighted
+    self.showHighlightTickBox:addOption(self.tickBoxText_highlightLocation)
     self:addChild(self.showHighlightTickBox)
-    y = y + UIUtils.measureFontY(UIFont.Small) + self.padY
+    y = y + FONT_HGT_SMALL + self.padY
 
-    self.claimButton = ISButton:new(self.padX, y, self.buttonWidth, self.buttonHeight, self.claimButtonText, self, ISClaimSafehouseUI.onOptionMouseDown)
+    self.claimButton = UIUtils.createButton(
+        self, self.padX, y, 
+        self.buttonWidth, self.buttonHeight,
+        self.buttonText_Claim, 
+        self, ISClaimSafehouseUI.onOptionMouseDown
+    )
     self.claimButton.internal = "CLAIM"
-    self.claimButton.backgroundColor = {r=0, g=0.3, b=0, a=0.8}
-    self.claimButton.backgroundColorMouseOver = {r=0, g=0.6, b=0, a=0.8}
-    self.claimButton:initialise()
-    self.claimButton:instantiate()
+    self.claimButton.backgroundColor = self.claimButton_bgColor
+    self.claimButton.backgroundColorMouseOver = self.claimButton_bgColor_MouseOver
     self.claimButton.enable = false
-    self.claimButton.borderColor = self.buttonBorderColor
-    self:addChild(self.claimButton)
 
-    self.cancel = ISButton:new(self.width - self.buttonWidth - self.padX, y, self.buttonWidth, self.buttonHeight, self.cancelButtonText, self, ISClaimSafehouseUI.onOptionMouseDown)
-    self.cancel.internal = "CANCEL"
-    self.cancel.backgroundColor = {r=0.3, g=0, b=0, a=0.8}
-    self.cancel.backgroundColorMouseOver = {r=0.6, g=0, b=0, a=0.8}
-    self.cancel:initialise()
-    self.cancel:instantiate()
-    self.cancel.borderColor = self.buttonBorderColor
-    self:addChild(self.cancel)
+    self.cancelButton = UIUtils.createButton(
+        self, self.width - self.buttonWidth - self.padX, y, 
+        self.buttonWidth, self.buttonHeight,
+        self.buttonText_Cancel, 
+        self, ISClaimSafehouseUI.onOptionMouseDown
+    )
+    self.cancelButton.internal = "CANCEL"
+    self.cancelButton.backgroundColor = self.cancelButton_bgColor
+    self.cancelButton.backgroundColorMouseOver = self.cancelButton_bgColor_MouseOver
+
     y = y + self.buttonHeight + self.padY
 
     self:setHeight(y)
+    UIUtils.centerUIElementOnScreen(self, 0, (getCore():getScreenHeight() / 2) - self.height)
 
-    local x = (getCore():getScreenWidth() - self.width) / 2
-    local y = (getCore():getScreenHeight() * 0.90) - self.height
-
-    self:setX(x)
-    self:setY(y)
-
-    self.drawMethod = function ()
-        self:onDrawHighlights()
+    if self.isPerimeterHighlighted then
+        self:startDrawHighlightTask()
     end
+end
 
+function ISClaimSafehouseUI:stopDrawHighlightTask()
+    Events.OnTick.Remove(self.drawMethod)
+end
+
+function ISClaimSafehouseUI:startDrawHighlightTask()
+    self.drawMethod = function () self:onDrawHighlights() end
     Events.OnTick.Add(self.drawMethod)
 end
 
@@ -174,7 +114,13 @@ function ISClaimSafehouseUI:render()
 end
 
 function ISClaimSafehouseUI:onClickShowHighlight(clickedOption, enabled)
-    self.showHighlighted = enabled
+    if enabled then
+        self:startDrawHighlightTask()
+    else
+        self:stopDrawHighlightTask() 
+    end
+
+    self.isPerimeterHighlighted = enabled
 end
 
 function ISClaimSafehouseUI:onOptionMouseDown(button)
@@ -197,8 +143,8 @@ function ISClaimSafehouseUI:onOptionMouseDown(button)
 end
 
 function ISClaimSafehouseUI:updateStatusLabel(text, color)
-    self.StatusLabel:setName(text)
-    self.StatusLabel:setColor(color.r,color.g, color.b)
+    self.label_StatusMessage:setName(text)
+    self.label_StatusMessage:setColor(color.r,color.g, color.b)
 end
 
 function ISClaimSafehouseUI:updateCoords(x1, y1, x2, y2)
@@ -294,7 +240,7 @@ function ISClaimSafehouseUI:updateData()
 
         local playerOwnedSafehouseCount = self:getPlayerOwnedSafehouseCount()
 
-        if playerOwnedSafehouseCount >= self.ownerLimit then
+        if playerOwnedSafehouseCount >= self.maxSafehousesLimit then
             self.isReachedLimit = true
             self:updateCanClaim()
             return
@@ -409,7 +355,7 @@ function ISClaimSafehouseUI:onDrawHighlights()
     end
 
     -- Verifica se as coordenadas estão válidas e se a área não é muito grande
-    if not (self.x1 and self.y1 and self.x2 and self.y2) or self.isTooBig or not self.showHighlighted then 
+    if not (self.x1 and self.y1 and self.x2 and self.y2) or self.isTooBig or not self.isPerimeterHighlighted then 
         return 
     end
 
@@ -467,61 +413,78 @@ function ISClaimSafehouseUI:onDrawHighlights()
 end
 
 function ISClaimSafehouseUI:close()
-    Events.OnTick.Remove(self.drawMethod)
+    self:stopDrawHighlightTask() 
     self:setVisible(false)
     self:removeFromUIManager()
     ISClaimSafehouseUI.instance = nil
 end
 
-function ISClaimSafehouseUI.OnPlayerDeath()
-    if ISClaimSafehouseUI.instance then
-        ISClaimSafehouseUI.instance:close()
-    end
-end
-
 function ISClaimSafehouseUI:new(player)
+    -- Verifica se já existe uma instância e a fecha, se necessário
     if ISClaimSafehouseUI.instance then
         ISClaimSafehouseUI.instance:close()
     end
 
+    -- Configurações iniciais da janela
     local width = 400
     local height = 200
-
     local x = 0
     local y = 0
 
+    -- Cria uma nova instância da UI
     o = ISPanel:new(x, y, width, height)
     setmetatable(o, self)
     self.__index = self
 
-    o.player = player
-    o.username = player:getUsername()
-    o.survivedDaysToClaim = tonumber(getServerOptions():getOption("SafehouseDaySurvivedToClaim"))
-    o.isAdmin = o.player:isAccessLevel("admin")
+    -- Definições dos widgets
+    o.padX = 20
+    o.padY = 20
+    o.shortPadX = o.padX / 2
+    o.shortPadY = o.padY / 2
 
-    o.gridSquare = nil
-
-    o.variableColor={r=0.9, g=0.55, b=0.1, a=1}
-    o.borderColor = {r=0.4, g=0.4, b=0.4, a=1}
-    o.backgroundColor = {r=0, g=0, b=0, a=0.8}
-    o.buttonBorderColor = {r=0.7, g=0.7, b=0.7, a=0.5}
-
-    o.x1 = nil
-    o.x2 = nil
-    o.y1 = nil
-    o.y2 = nil
-
-    o.safeWidth = nil
-    o.safeHeight = nil
-
+    -- Cores para destaque (highlight)
     o.highlightYesColor = {r=0, g=1, b=0, a=1}
     o.highlightNotColor = {r=1, g=0, b=0, a=1}
     o.highlightPlayerColor = {r=0, g=0, b=1, a=1}
 
+    -- Cores da UI
+    o.claimButton_bgColor = {r=0, g=0.3, b=0, a=0.8}
+    o.claimButton_bgColor_MouseOver = {r=0, g=0.6, b=0, a=0.8}
+    o.cancelButton_bgColor = {r=0.3, g=0, b=0, a=0.8}
+    o.cancelButton_bgColor_MouseOver = {r=0.6, g=0, b=0, a=0.8}
+
+    -- Configurações do jogador e da UI
+    o.player = player
+    o.username = player:getUsername()
+    o.isAdmin = o.player:isAccessLevel("admin")
+    o.survivedDaysToClaim = tonumber(getServerOptions():getOption("SafehouseDaySurvivedToClaim"))
+    o.isPerimeterHighlighted = SandboxVars.SafehousePlus.FloorHighlighOnClaimUIOpen
+
+    local vipPlayers = SPUtils.splitStringIntoLookupTable(SandboxVars.SafehousePlus.SpecialPlayersList, ";")
+    local isVip = vipPlayers[o.username]
+
+    o.maxSafehousesLimit = (
+        isVip
+        and SandboxVars.SafehousePlus.SpecialPlayersOwnerLimit 
+        or SandboxVars.SafehousePlus.OwnerLimit
+    )
+
+    -- Configurações de atualização
+    o.updateSpeed = 50
+    o.updateCounter = o.updateSpeed
+
+    -- Configurações de interação
+    o.moveWithMouse = true
+
+    -- Variáveis de estado da UI
+    o.gridSquare = nil
+    o.x1, o.x2, o.y1, o.y2 = nil, nil, nil, nil
+    o.safeWidth, o.safeHeight = nil, nil
     o.highlightColor = o.highlightYesColor
     o.buildingDef = nil
     o.isoBuilding = nil
 
+    -- Variáveis de validação
     o.canClaim = false
     o.overlap = false
     o.isTooBig = false
@@ -530,16 +493,86 @@ function ISClaimSafehouseUI:new(player)
     o.isMember = false
     o.isReachedLimit = false
 
-    o.showHighlighted = SandboxVars.SafehousePlus.FloorHighlighOnClaimUIOpen
+    -- Textos traduzidos para a UI
+    o.titleText = getText("IGUI_ISClaimSafehousesUI_Title")
+    o.buttonText_Claim = getText("IGUI_ISClaimSafehousesUI_Button_Claim")
+    o.buttonText_Cancel = getText("UI_btn_close")
+    o.tickBoxText_highlightLocation = getText("IGUI_SafehouseUI_TickBox_HighlightLocation")
+    o.statusText_Success = getText("IGUI_ISClaimSafehousesUI_Status_Success")
+    o.statusText_OutsideArea = getText("IGUI_ISClaimSafehousesUI_Status_OutsideArea")
+    o.statusText_OverlapExistingSafehouse = getText("IGUI_ISClaimSafehousesUI_Status_OverlapsExistingSafehouse")
+    o.statusText_NotResidential = getText("IGUI_ISClaimSafehousesUI_Status_NotResidential")
+    o.statusText_ClaimBlockedByEntities = getText("IGUI_ISClaimSafehousesUI_Status_ClaimBlockedByEntities")
+    o.statusText_SpawnLocation = getText("IGUI_ISClaimSafehousesUI_Status_SpawnLocation")
+    o.statusText_AreaTooLarge = getText("IGUI_ISClaimSafehousesUI_Status_AreaTooLarge")
+    o.statusText_AlreadyMember = getText("IGUI_ISClaimSafehousesUI_Status_AlreadyMember")
+    o.statusText_MaxSafehousesReached = getText("IGUI_ISClaimSafehousesUI_Status_MaxSafehousesReached")
+    o.statusText_SurvivalDaysRequired = getText("IGUI_ISClaimSafehousesUI_Status_SurvivalDaysRequired", o.survivedDaysToClaim)
 
-    o.updateSpeed = 50
-    o.updateCounter = o.updateSpeed
+    -- Fontes
+    o.font = UIFont.Small
+    o.titleFont = UIFont.Medium
+    o.font_Height = UIUtils.measureFontY(o.font)
+    o.titleFont_Height = UIUtils.measureFontY(o.titleFont)
 
-    o.moveWithMouse = true
+    -- Diensões dos textos
+    o.titleText_Width = UIUtils.measureTextX(o.titleFont, o.titleText)
+    o.buttonText_Claim_Width = UIUtils.measureTextX(o.font, o.buttonText_Claim)
+    o.buttonText_Cancel_Width = UIUtils.measureTextX(o.font, o.buttonText_Cancel)
+    o.statusText_Success_Width = UIUtils.measureTextX(o.font, o.statusText_Success)
+    o.statusText_OutsideArea_Width = UIUtils.measureTextX(o.font, o.statusText_OutsideArea)
+    o.statusText_OverlapExistingSafehouse_Width = UIUtils.measureTextX(o.font, o.statusText_OverlapExistingSafehouse)
+    o.statusText_NotResidential_Width = UIUtils.measureTextX(o.font, o.statusText_NotResidential)
+    o.statusText_ClaimBlockedByEntities_Width = UIUtils.measureTextX(o.font, o.statusText_ClaimBlockedByEntities)
+    o.statusText_SpawnLocation_Width = UIUtils.measureTextX(o.font, o.statusText_SpawnLocation)
+    o.statusText_AreaTooLarge_Width = UIUtils.measureTextX(o.font, o.statusText_AreaTooLarge)
+    o.statusText_AlreadyMember_Width = UIUtils.measureTextX(o.font, o.statusText_AlreadyMember)
+    o.statusText_MaxSafehousesReached_Width = UIUtils.measureTextX(o.font, o.statusText_MaxSafehousesReached)
+    o.statusText_SurvivalDaysRequired_Width = UIUtils.measureTextX(o.font, o.statusText_SurvivalDaysRequired)
 
+    -- Calcula a largura máxima dos textos de status
+    o.maxStatusTextWidth = math.max(
+        o.statusText_OutsideArea_Width,
+        o.statusText_Success_Width,
+        o.statusText_AlreadyMember_Width,
+        o.statusText_AreaTooLarge_Width,
+        o.statusText_OverlapExistingSafehouse_Width,
+        o.statusText_NotResidential_Width,
+        o.statusText_ClaimBlockedByEntities_Width,
+        o.statusText_SpawnLocation_Width,
+        o.statusText_MaxSafehousesReached_Width
+    )
+
+    -- Dimensões dos widgets
+    o.buttonHeight = math.max(25, FONT_HGT_SMALL + 6)
+    o.minButtonWidth = 200
+    o.buttonWidth = math.max(
+        (math.max(o.titleText_Width, o.maxStatusTextWidth) / 2) - o.shortPadX,
+        (math.max(o.buttonText_Claim_Width, o.buttonText_Cancel_Width) / 2) + o.padX,
+        o.minButtonWidth
+    )
+
+    o.labelHeight = FONT_HGT_MEDIUM + 6
+
+    o.tickBoxWidth = UIUtils.measureTextX(UIFont.Small, o.tickBoxText_highlightLocation) + 18
+
+    o:setWidth(
+        math.max(
+            o.titleText_Width,
+            o.maxStatusTextWidth,
+            (o.buttonWidth * 2) + o.shortPadX
+        ) + (2 * o.padX)
+    )
+
+    -- Armazena a instância atual na classe
     ISClaimSafehouseUI.instance = o
     return o
 end
 
-Events.OnPlayerDeath.Add(ISClaimSafehouseUI.OnPlayerDeath)
+function ISClaimSafehouseUI.OnPlayerDeath()
+    if ISClaimSafehouseUI.instance then
+        ISClaimSafehouseUI.instance:close()
+    end
+end
 
+Events.OnPlayerDeath.Add(ISClaimSafehouseUI.OnPlayerDeath)

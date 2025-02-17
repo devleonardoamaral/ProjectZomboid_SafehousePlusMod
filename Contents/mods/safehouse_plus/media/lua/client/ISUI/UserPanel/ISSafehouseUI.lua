@@ -66,7 +66,7 @@ function ISSafehouseUI:initialise()
     self.safehouseOwnerEntryTooltipDefaultText = getText("Tooltip_SafehousePlus_setNewOwnerEntry_Default")
     self.addMemberEntryTooltipDefaultText = getText("Tooltip_SafehousePlus_AddMemberEntry_Default")
     
-    self.showSafehouseTickBoxText = getText("IGUI_SafehouseUI_SafehouseLimits")
+    self.showSafehouseTickBoxText = getText("IGUI_SafehouseUI_TickBox_HighlightLocation")
     self.respawnSafehouseTickBoxText = getText("IGUI_SafehouseUI_Respawn")
 
     local tickBoxesWidth = UIUtils.measureTextX(

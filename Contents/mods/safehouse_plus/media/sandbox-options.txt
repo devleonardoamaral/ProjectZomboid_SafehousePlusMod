@@ -113,3 +113,19 @@ option SafehousePlus.MaxSafehouseSize
     page = SafehousePlusRules,
     translation = SafehousePlus_MaxSafehouseSize,
 }
+
+option SafehousePlus.UseLegacyResidentialCheck
+{
+    type = boolean,
+    default = true,
+    page = SafehousePlusRules,
+    translation = SafehousePlus_UseLegacyResidentialCheck,
+}
+
+option SafehousePlus.NonResidentialRoomTypes
+{
+    type = string,
+    default = ,
+    page = SafehousePlusRules,
+    translation = SafehousePlus_NonResidentialRoomTypes,
+}

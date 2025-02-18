@@ -42,4 +42,10 @@ Sandbox_PTBR = {
 
     Sandbox_SafehousePlus_SpecialPlayersList = "Jogadores VIP",
     Sandbox_SafehousePlus_SpecialPlayersList_tooltip = "Adicione o nome de usuário dos jogadores VIPs separados por ';'. Jogadores na lista VIP possuem regras especiais para revindicar uma safehouse.",
+
+    Sandbox_SafehousePlus_UseLegacyResidentialCheck = "Lógica Legada Checagem Residencial",
+    Sandbox_SafehousePlus_UseLegacyResidentialCheck_tooltip = "Se selecionado, a lógica vanilla para verificar se o edifício é residencial será utilizada em conjunto com o novo sistema de detecção de salas. Se desativado, você terá que listar todos os cômodos manualmente para que o novo sistema detecte corretamente edifícios residenciais e não-residenciais.",
+
+    Sandbox_SafehousePlus_NonResidentialRoomTypes = "Salas Não-Residenciais",
+    Sandbox_SafehousePlus_NonResidentialRoomTypes_tooltip = "Adicione o nome do tipo de cada RoomDef que não devem ser consideradas como residencial, separados por ';'. Você pode ver a lista completa de RoomDefs em https://theindiestone.com/forums/index.php?/topic/44603-comeplete-list-of-room-defintions-as-of-4165.",
 }

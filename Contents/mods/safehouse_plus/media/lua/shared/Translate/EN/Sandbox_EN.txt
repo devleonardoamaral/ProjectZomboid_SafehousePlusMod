@@ -42,4 +42,10 @@ Sandbox_EN = {
 
     Sandbox_SafehousePlus_SpecialPlayersList = "VIP Players",
     Sandbox_SafehousePlus_SpecialPlayersList_tooltip = "Add the usernames of VIP players separated by ';'. VIP players in the list have special rules for claiming a safehouse.",
+
+    Sandbox_SafehousePlus_UseLegacyResidentialCheck = "Legacy Residential Check Logic",
+    Sandbox_SafehousePlus_UseLegacyResidentialCheck_tooltip = "If selected, the vanilla logic for checking if the building is residential will be used alongside the new room detection system. If disabled, you will need to manually list all rooms for the new system to correctly detect residential and non-residential buildings.",
+
+    Sandbox_SafehousePlus_NonResidentialRoomTypes = "Non-Residential Rooms",
+    Sandbox_SafehousePlus_NonResidentialRoomTypes_tooltip = "Add the name of each RoomDef type that should not be considered residential, separated by ';'. You can view the complete list of RoomDefs at https://theindiestone.com/forums/index.php?/topic/44603-comeplete-list-of-room-defintions-as-of-4165.",
 }

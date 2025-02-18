@@ -221,13 +221,6 @@ end
 function ISClaimSafehouseUI:updateCanClaim()
     local status = self.statusText_Success
     local canClaim = true
-    local isResidential = false
-
-    if self.isoBuilding then
-        isResidential = self.isoBuilding:isResidential()
-    end
-
-    local allowNonResidential = getServerOptions():getOption("SafehouseAllowNonResidential") == "true" and true or false
 
     if not self.survivedLongEnough then
         canClaim = false
@@ -244,21 +237,21 @@ function ISClaimSafehouseUI:updateCanClaim()
     elseif not (self.x1 and self.y1 and self.x2 and self.y2 and self.safeWidth and self.safeHeight) then
         canClaim = false
         status = self.statusText_OutsideArea
-    elseif self.isTooBig then
+    elseif self.isSpawn then
         canClaim = false
-        status = self.statusText_AreaTooLarge
-    elseif not allowNonResidential and not isResidential then
+        status = self.statusText_SpawnLocation
+    elseif not self.allowNonResidential and not self.isResidential then
         canClaim = false
         status = self.statusText_NotResidential
     elseif self.overlap then
         canClaim = false
         status = self.statusText_OverlapExistingSafehouse
+    elseif self.isTooBig then
+        canClaim = false
+        status = self.statusText_AreaTooLarge
     elseif self.occupied then
         canClaim = false
         status = self.statusText_ClaimBlockedByEntities
-    elseif self.isSpawn then
-        canClaim = false
-        status = self.statusText_SpawnLocation
     end
 
     self.canClaim = canClaim
@@ -289,6 +282,7 @@ function ISClaimSafehouseUI:updateData()
     self.isReachedLimit = false
     self.exceedsMaxFloors = false
     self.survivedLongEnough = true
+    self.isResidential = true
     
     if not self.isAdmin then
         self.survivedLongEnough = math.floor(self.player:getHoursSurvived() / 24) >= self.survivedDaysToClaim
@@ -336,13 +330,21 @@ function ISClaimSafehouseUI:updateData()
         self:updateCanClaim()
         return 
     end
-    
+
+    if self.useLegacyResidentialCheck and not self.allowNonResidential then
+        self.isResidential = self.isoBuilding:isResidential()
+    end
+
     local rooms = self.buildingDef:getRooms()
     self.safeFloors = 0
 
     for i = 0, rooms:size() - 1 do
         local room = rooms:get(i)
         local z = room:getZ()
+
+        if not self.allowNonResidential and self.nonResidentialRoomDefs[room:getName()] then
+            self.isResidential = false
+        end
 
         if z > self.safeFloors then
             self.safeFloors = z
@@ -565,6 +567,10 @@ function ISClaimSafehouseUI:new(player)
         or SandboxVars.SafehousePlus.OwnerLimit
     )
 
+    o.useLegacyResidentialCheck = SandboxVars.SafehousePlus.UseLegacyResidentialCheck
+    o.nonResidentialRoomDefs = SPUtils.splitStringIntoLookupTable(SandboxVars.SafehousePlus.NonResidentialRoomTypes, ";")
+    o.allowNonResidential = getServerOptions():getOption("SafehouseAllowNonResidential") == "true" and true or false
+
     -- Configurações de atualização
     o.updateSpeed = 30
     o.updateCounter = o.updateSpeed
@@ -588,6 +594,7 @@ function ISClaimSafehouseUI:new(player)
     o.isSpawn = false
     o.occupied = false
     o.isMember = false
+    o.isResidential = true
     o.isReachedLimit = false
     o.exceedsMaxFloors = false
 

@@ -39,4 +39,10 @@ Sandbox_JP = {
 
     Sandbox_SafehousePlus_SpecialPlayersList = "VIPプレイヤー",
     Sandbox_SafehousePlus_SpecialPlayersList_tooltip = "VIPプレイヤーのユーザー名を「;」で区切って追加します。このリストに含まれるVIPプレイヤーは、特別なセーフハウス登録ルールが適用されます。",
+
+    Sandbox_SafehousePlus_UseLegacyResidentialCheck = "旧式住宅判定ロジック",
+    Sandbox_SafehousePlus_UseLegacyResidentialCheck_tooltip = "有効にすると、従来の住宅判定ロジックが新しい部屋検出システムと併用されます。無効にすると、新システムが正しく住宅・非住宅を判定できるように、すべての部屋を手動でリストアップする必要があります。",
+
+    Sandbox_SafehousePlus_NonResidentialRoomTypes = "非住宅用の部屋",
+    Sandbox_SafehousePlus_NonResidentialRoomTypes_tooltip = "住宅として扱わない部屋の種類を ';' で区切って追加してください。利用可能な部屋の種類一覧は https://theindiestone.com/forums/index.php?/topic/44603-comeplete-list-of-room-defintions-as-of-4165 で確認できます。",
 }
